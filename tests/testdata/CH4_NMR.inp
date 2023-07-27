@@ -1,0 +1,19 @@
+! BLYP def2-SV(P) def2/J OPT xyzfile
+
+* xyz 0 1
+C 0 0 0
+H 1 0 0
+H -1 0 0
+H 0 1 0
+H 0 -1 1
+*
+
+$new_job
+! BLYP def2-SV(P) def2/J NMR
+
+* xyzfile 0 1
+
+%EPRNMR
+     NUCLEI = ALL C {SHIFT}
+     NUCLEI = ALL H {SHIFT, SSALL}
+END

@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, List, Tuple
 
 import re
 
@@ -27,3 +27,16 @@ def freqs(text: str) -> List[float]:
 
     freqs = [float(m) for m in query.findall(extracted[-1])]
     return freqs
+
+def electronic(text: str) -> List[Tuple[float,float]]:
+    """Returns list of intensities and wavelenghts of electronic transitions"""
+    extract = re.compile(r"ABSORPTION SPECTRUM VIA TRANSITION ELECTRIC DIPOLE MOMENTS(?:.*\n){5}(?:\s*\d+\s+\-?\d+.*\n)*")
+    query = re.compile(r"\n\s*\d+\s+\-?\d+\.\d+\s+(\-?\d+\.\d+)\s+(\-?\d+\.\d+)")
+    extracted = extract.findall(text)
+    if len(extracted) == 0:
+        return []
+    elif len(extracted) > 1:
+        print("WARNING: The output file contains multiple records with electronic transitions")
+
+    trans = [(float(m[1]), float(m[0])) for m in query.findall(extracted[-1])]
+    return trans

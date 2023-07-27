@@ -27,6 +27,9 @@ class OutputData:
 
     thermochemistry : List[Thermochemistry]
         Contains list of thermodynamical data at individual temperatures
+    
+    electronic_trans : List[Tuple[float,float]]
+        Contains list of electronic transitions (intensity, wavelength)
     """
 
     def __init__(self, text: str):
@@ -37,6 +40,7 @@ class OutputData:
         self.vib_freqs = bp.freqs(text)
         self.negative_freqs = any([f < 0 for f in self.vib_freqs])
         self.thermochemistry = Thermochemistry.parse_all(text)
+        self.electronic_trans = bp.electronic(text)
 
     def parse_file(path: str) -> OutputData:
         """Parses .out file"""
