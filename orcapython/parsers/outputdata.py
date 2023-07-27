@@ -68,15 +68,22 @@ class OutputData:
         
         if len(self.vib_freqs) > 0:
             if not self.negative_freqs:
-                text += f"Vibrational frequencies available (n={len(self.vib_freqs)}), all are positive"
+                text += f"Vibrational frequencies available (n={len(self.vib_freqs)}), all are positive\n"
             else:
-                text += f"Vibrational frequencies available (n={len(self.vib_freqs)})"
-                text += f"WARNING: there are negative frequencies (n={sum(1 if f < 0 else 0 for f in self.vib_freqs)})"
+                text += f"Vibrational frequencies available (n={len(self.vib_freqs)})\n"
+                text += f"WARNING: there are negative frequencies (n={sum(1 if f < 0 else 0 for f in self.vib_freqs)})\n"
         
         for th in self.thermochemistry:
-            text += str(th)
+            text += "\n"+str(th)+"\n"
+
+        if len(self.electronic_trans) > 0:
+            text += "\nElectronic transitions\n"
+            text += "----------------------\n"
+            text += f" I [A.U.]  wavelength\n"
+            for i,w in sorted(self.electronic_trans)[::-1][:10]:
+                text += f"{i: >8.4f}   {w:>6.1f} nm\n"
         
         if self.nmr is not None:
-            text += str(self.nmr)
+            text += "\n"+str(self.nmr)+"\n"
         
         return text

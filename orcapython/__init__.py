@@ -1,1 +1,1 @@
-from parsers.outputdata import OutputData
+from orcapython.parsers.outputdata import OutputData
