@@ -54,7 +54,21 @@ class OutputData:
             parsed = OutputData(text)
         return parsed
 
-    def summary(self) -> std:
+    def format_el_transitions(self, n_max : int = 10, min_lambda : float = 0) -> str:
+        """Formats the most intense electronic transitions for printing"""
+        text = ""
+        text += "Electronic transitions\n"
+        text += "----------------------\n"
+        text += f" I [A.U.]  wavelength\n"
+
+        trans = [t for t in self.electronic_trans if t[1] > min_lambda]
+
+        for i,w in sorted(trans)[::-1][:10]:
+            text += f"{i: >8.4f}   {w:>6.1f} nm\n"
+
+        return text[:-1]
+
+    def summary(self) -> str:
         """Generates summary of all parsed data"""
         text = ""
 
@@ -77,11 +91,7 @@ class OutputData:
             text += "\n"+str(th)+"\n"
 
         if len(self.electronic_trans) > 0:
-            text += "\nElectronic transitions\n"
-            text += "----------------------\n"
-            text += f" I [A.U.]  wavelength\n"
-            for i,w in sorted(self.electronic_trans)[::-1][:10]:
-                text += f"{i: >8.4f}   {w:>6.1f} nm\n"
+            text += "\n"+self.format_el_transitions()+"\n"
         
         if self.nmr is not None:
             text += "\n"+str(self.nmr)+"\n"
