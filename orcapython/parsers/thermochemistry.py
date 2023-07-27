@@ -60,12 +60,12 @@ class Thermochemistry:
             vals.append((1/0) if len(res) == 0 else float(res[0]))
         
         self.temperature = vals[0]
-        self.electronic = vals[1]
-        self.zpe = vals[2]
-        self.inner = vals[3]
-        self.enthalpy = vals[4]
-        self.entropy = vals[5]
-        self.gibbs = vals[6]
+        self.electronic = vals[1] * hartree
+        self.zpe = vals[2] * hartree
+        self.inner = vals[3] * hartree
+        self.enthalpy = vals[4] * hartree
+        self.entropy = vals[5] * hartree
+        self.gibbs = vals[6] * hartree
 
         self.inner_correction = self.inner - self.electronic
         self.enthalpy_correction = self.enthalpy - self.electronic
