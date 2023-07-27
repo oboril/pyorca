@@ -2,6 +2,8 @@ from typing import Optional, List, Tuple
 
 import re
 
+hartree = 2625.5
+
 def exit_status(text: str) -> bool:
     """Returns true if ORCA terminated normally"""
     query = re.compile(r"\*\*\*\*ORCA TERMINATED NORMALLY\*\*\*\*")
@@ -12,7 +14,7 @@ def single_point_energies(text: str) -> List[float]:
     """Returns list of all `FINAL SINGLE POINT ENERGY` values"""
     query = re.compile(r"FINAL SINGLE POINT ENERGY\s+(\-?\d+\.\d+)")
     matches = query.findall(text)
-    energies = [float(m) for m in matches]
+    energies = [float(m)*hartree for m in matches]
     return energies
 
 def freqs(text: str) -> List[float]:

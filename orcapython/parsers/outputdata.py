@@ -53,3 +53,30 @@ class OutputData:
             text = f.read()
             parsed = OutputData(text)
         return parsed
+
+    def summary(self) -> std:
+        """Generates summary of all parsed data"""
+        text = ""
+
+        if self.terminated_normally:
+            text += "ORCA terminated normally\n"
+        else:
+            text += "ORCA did NOT terminate normally!\n"
+        
+        if self.final_energy is not None:
+            text += f"Final energy: {self.final_energy:0.1f} kJ/mol ({len(self.single_point_energies)} S.P. energies logged)\n"
+        
+        if len(self.vib_freqs) > 0:
+            if not self.negative_freqs:
+                text += f"Vibrational frequencies available (n={len(self.vib_freqs)}), all are positive"
+            else:
+                text += f"Vibrational frequencies available (n={len(self.vib_freqs)})"
+                text += f"WARNING: there are negative frequencies (n={sum(1 if f < 0 else 0 for f in self.vib_freqs)})"
+        
+        for th in self.thermochemistry:
+            text += str(th)
+        
+        if self.nmr is not None:
+            text += str(self.nmr)
+        
+        return text
