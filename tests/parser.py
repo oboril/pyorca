@@ -20,6 +20,8 @@ print(data.electronic_trans)
 
 
 print("\n\nCH4 nmr")
-data = OutputData.parse_file("tests/testdata/CH4_UVVIS.out")
+data = OutputData.parse_file("tests/testdata/CH4_NMR.out")
 print(data.terminated_normally)
 print(data.final_energy)
+
+print(data.nmr)

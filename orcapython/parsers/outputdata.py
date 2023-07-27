@@ -3,6 +3,7 @@ from typing import Optional, List
 
 import orcapython.parsers.basic_parsers as bp
 from orcapython.parsers.thermochemistry import Thermochemistry
+from orcapython.parsers.nmr import NMR
 
 class OutputData:
     """
@@ -30,6 +31,9 @@ class OutputData:
     
     electronic_trans : List[Tuple[float,float]]
         Contains list of electronic transitions (intensity, wavelength)
+    
+    nmr : NMR
+        Contains NMR data - shifts and coupling constants
     """
 
     def __init__(self, text: str):
@@ -41,6 +45,7 @@ class OutputData:
         self.negative_freqs = any([f < 0 for f in self.vib_freqs])
         self.thermochemistry = Thermochemistry.parse_all(text)
         self.electronic_trans = bp.electronic(text)
+        self.nmr = NMR.parse(text)
 
     def parse_file(path: str) -> OutputData:
         """Parses .out file"""
