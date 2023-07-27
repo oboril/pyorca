@@ -63,7 +63,7 @@ class OutputData:
 
         trans = [t for t in self.electronic_trans if t[1] > min_lambda]
 
-        for i,w in sorted(trans)[::-1][:10]:
+        for i,w in sorted(trans)[::-1][:n_max]:
             text += f"{i: >8.4f}   {w:>6.1f} nm\n"
 
         return text[:-1]
