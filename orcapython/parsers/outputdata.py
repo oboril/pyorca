@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import Optional, List
 
 import orcapython.parsers.basic_parsers as bp
+from orcapython.parsers.thermochemistry import Thermochemistry
 
 class OutputData:
     """
@@ -24,6 +25,8 @@ class OutputData:
     negative_freqs : bool
         Whether the normal modes include imaginary nodes (modes with negative frequencies)
 
+    thermochemistry : List[Thermochemistry]
+        Contains list of thermodynamical data at individual temperatures
     """
 
     def __init__(self, text: str):
@@ -33,6 +36,7 @@ class OutputData:
         self.final_energy = None if len(self.single_point_energies) == 0 else self.single_point_energies[-1]
         self.vib_freqs = bp.freqs(text)
         self.negative_freqs = any([f < 0 for f in self.vib_freqs])
+        self.thermochemistry = Thermochemistry.parse_all(text)
 
     def parse_file(path: str) -> OutputData:
         """Parses .out file"""
