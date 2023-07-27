@@ -80,8 +80,8 @@ class Thermochemistry:
 
     def __str__(self) -> str:
         """Very short conversion to string"""
-        text = f"""Thermochemistry at {self.temperature:0.2f}K:\
-                   \n-------------------------------------\
+        text = f"""Thermochemistry at {self.temperature:0.2f} K:\
+                   \n----------------------------\
                    \nZPE = {self.zpe:0.1f} kJ/mol\
                    \nThermal correction = {self.inner_correction:0.1f} kJ/mol\
                    \nGibb's energy correction = {self.gibbs_correction:0.1f} kJ/mol\

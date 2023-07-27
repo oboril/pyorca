@@ -92,6 +92,3 @@ class NMR:
                 res += f"\n{a+str(i): >5}"+"".join([f"{c: >10.2f}" for c in coupl])
 
         return res
-
-
-    #CHEMICAL SHIELDING SUMMARY \(ppm\)\n(?:.*\n){5}(?:\s+\d+\s+\w+\s+.*\n)*
