@@ -1,4 +1,4 @@
-"""Script for parsing .out files"""
+"""Script for parsing and summarizing .out files"""
 
 import argparse
 from orcapython import OutputData
