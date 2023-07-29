@@ -81,7 +81,7 @@ class OutputData:
             text += f"Final energy: {self.final_energy:0.3f} kJ/mol ({len(self.single_point_energies)} S.P. energies logged)\n"
 
         # if orca did not terminate normally, print also all single point energies:
-        if len(self.single_point_energies) > 1:
+        if not self.terminated_normally and len(self.single_point_energies) > 1:
             tmpl = "{: <10}{: >20}{: >20}\n"
             text += tmpl.format("Step","Energy [kJ/mol]","Difference [kJ/mol]")
             prev_eng = 0
