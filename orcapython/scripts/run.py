@@ -67,8 +67,9 @@ if __name__ == "__main__":
         print(data.summary())
     
     # Copy out specified files if required
-    for ext in args.copy:
-        filename = name + ext
-        shutil.copy(os.path.join(runtimedir, filename), os.path.join(basedir, filename))
+    if args.copy is not None:
+        for ext in args.copy:
+            filename = name + ext
+            shutil.copy(os.path.join(runtimedir, filename), os.path.join(basedir, filename))
 
     exit(0)

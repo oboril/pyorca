@@ -6,8 +6,6 @@ def read_xyz(text: str) -> Tuple[List[str], np.array]:
     """Reads .xyz text and returns atoms and coordinates"""
     lines = text.splitlines()
 
-    print(text)
-
     V = list()
     atoms = list()
     n_atoms = int(lines[0])
