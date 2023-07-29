@@ -81,12 +81,12 @@ class OutputData:
             text += f"Final energy: {self.final_energy:0.1f} kJ/mol ({len(self.single_point_energies)} S.P. energies logged)\n"
 
         # if orca did not terminate normally, print also all single point energies:
-        if len(self.single_point_energies) > 2:
-            tmpl = "{: <10}{: >20}{: >20}"
-            print(tmpl.format("Step","Energy [kJ/mol]","Difference [kJ/mol]"))
+        if len(self.single_point_energies) > 1:
+            tmpl = "{: <10}{: >20}{: >20}\n"
+            text += tmpl.format("Step","Energy [kJ/mol]","Difference [kJ/mol]")
             prev_eng = 0
             for idx, energ in enumerate(self.single_point_energies):
-                print(tmpl.format(idx, f"{energ:0.1f}", f"{energ - prev_eng:0.1f}"))
+                text += tmpl.format(idx, f"{energ:0.1f}", f"{energ - prev_eng:0.1f}")
                 prev_eng = energ
         
         if len(self.vib_freqs) > 0:

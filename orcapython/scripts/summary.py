@@ -23,7 +23,7 @@ if __name__ == "__main__":
                 print("#"*50)
                 print("\n"*2)
     else:
-        data = OutputData.parse_file(path)
+        data = OutputData.parse_file(args.path)
         print(data.summary())
     
     exit(0)
