@@ -1,6 +1,9 @@
 """This module contains procedures for aligning molecules and calculating RMSD"""
 
 import numpy as np
+
+from typing import List
+
 from orcapython.xyz import read_xyz
 
 def align_xyz_files(path1 : str, path2 : str) -> float:

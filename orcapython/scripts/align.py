@@ -1,6 +1,7 @@
 import argparse
-from orcapython.xyz import align_xyz_files
 import os
+
+from orcapython.xyz import align_xyz_files
 
 description = """\
 This script aligns molecules in .xyz files and prints the RMSD.
@@ -17,6 +18,6 @@ if __name__ == "__main__":
     
     for sample in args.samples:
         rmsd = align_xyz_files(args.reference, sample)
-        print(f"{sample: <20}: RMSD = {rmds:0.4f}")
+        print(f"{sample: <20} RMSD = {rmsd:0.4f}")
     
     exit(0)
