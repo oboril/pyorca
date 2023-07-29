@@ -36,6 +36,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument("path", type=str, help="Path to the .inp file")
     parser.add_argument("--summary", nargs="?", default=False, const=True, help="Print summary of the calculation when it finishes")
+    parser.add_argument("--copy", nargs="*", type=str, help="Copy file with specified extension from the runtime folder, e.g. --copy .xyz")
 
     args = parser.parse_args()
 
@@ -65,4 +66,9 @@ if __name__ == "__main__":
         print("\nSUMMARY:")
         print(data.summary())
     
+    # Copy out specified files if required
+    for ext in args.copy:
+        filename = name + ext
+        shutil.copy(os.path.join(runtimedir, filename), os.path.join(basedir, filename))
+
     exit(0)
