@@ -3,6 +3,17 @@
 import numpy as np
 from orcapython.xyz import read_xyz
 
+def align_xyz_files(path1 : str, path2 : str) -> float:
+    """Aligns molecules from .xyz files and returns the RMSD"""
+
+    with open(path1, "r") as f:
+        _, coords1 = read_xyz(f.read())
+    
+    with open(path2, "r") as f:
+        _, coords2 = read_xyz(f.read())
+
+    return aligned_rmsd(coords1, coords2)
+
 def aligned_rmsd(coords1 : List[List[float]] | np.array, coords2 : List[List[float]] | np.array) -> float:
     """Aligns the structures and returns the RMSD. Assumes the ordering of atoms is identical in both."""
     
