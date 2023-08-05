@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import List, Tuple
 
 @dataclass(slots=True, init=True)
-class VibrationalSpectrum:
+class NormalModes:
     """
     Contains data from harmonic vibrational modes.
 
