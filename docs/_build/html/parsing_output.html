@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parsing ORCA output files &mdash; PyOrca 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Single Point Calculation" href="parsing_output.sp.html" />
+    <link rel="prev" title="Welcome to PyOrca!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PyOrca
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to PyOrca!</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parsing Output</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Parsing ORCA output files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.sp.html">Single Point Calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.opt.html">Geometry Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.ref.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyOrca</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Parsing ORCA output files</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/parsing_output.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="parsing-orca-output-files">
+<h1>Parsing ORCA output files<a class="headerlink" href="#parsing-orca-output-files" title="Permalink to this heading"></a></h1>
+<p>The ORCA output can be parsed using the <a class="reference internal" href="parsing_output.ref.html#pyorca.OrcaOutput" title="pyorca.OrcaOutput"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrcaOutput</span></code></a> class.</p>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h2>
+<p>DFT calculation was used to optimize ethylene geometry. Let’s see some basic information about the calculation!</p>
+<p>The ORCA output is in <a class="reference download internal" download="" href="_downloads/8fd5da73c32f8feb8a66e2d482baff6c/ethylene_geometry.out"><code class="xref download docutils literal notranslate"><span class="pre">ethylene_geometry.out</span></code></a> file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import PyOrca</span>
+<span class="kn">import</span> <span class="nn">pyorca</span> <span class="k">as</span> <span class="nn">po</span>
+
+<span class="c1"># parse the ORCA output file</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">po</span><span class="o">.</span><span class="n">OrcaOutput</span><span class="o">.</span><span class="n">parse_file</span><span class="p">(</span><span class="s1">&#39;ethylene_geometry.out&#39;</span><span class="p">)</span>
+
+<span class="c1"># see what was the ORCA input file name</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The input file name:&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">input_filename</span><span class="p">)</span>
+
+<span class="c1"># see what was the calculation input</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The ORCA input was:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">input_text</span><span class="p">)</span>
+
+<span class="c1"># check that the calculation terminated normally</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Did calculation terminate normally:&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">terminated_normally</span><span class="p">)</span>
+
+<span class="c1"># see how long the ORCA calculation took</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The calculation took&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>The input file name: runtime/ethylene_geometry.inp
+The ORCA input was:
+! B3LYP def2-TZVP def2/J OPT TightOpt
+
+* xyz 0 1
+   C       -8.44174        0.21370        0.00000
+   C       -7.17489        0.62142        0.00000
+   H       -8.71487       -0.72541        0.47062
+   H       -9.21135        0.81722       -0.47062
+   H       -6.40529        0.01790        0.47062
+   H       -6.90176        1.56053       -0.47062
+*
+
+Did calculation terminate normally: True
+The calculation took 0:00:44.680000
+</pre></div>
+</div>
+<p>We can see what was the calculation input, and that the calculation took just under 15 seconds!</p>
+<p>The results of the calculation can be accessed in <a class="reference internal" href="parsing_output.ref.html#pyorca.OrcaOutput.calculations" title="pyorca.OrcaOutput.calculations"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OrcaOutput.calculations</span></code></a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to PyOrca!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="parsing_output.sp.html" class="btn btn-neutral float-right" title="Single Point Calculation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jan Oboril.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
