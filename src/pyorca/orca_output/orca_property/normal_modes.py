@@ -46,7 +46,7 @@ def _parse_normal_modes(text: str) -> None | List[float]:
     """Tries to find and extract all harmonic frequencies"""
 
     extracted = re.search(
-        r"VIBRATIONAL FREQUENCIES(?:.*\n){5}((?:.*cm\*\*-1\n)+)",
+        r"VIBRATIONAL FREQUENCIES(?:.*\n){5}((?:.*cm\*\*-1.*\n)+)",
         text
     )
 

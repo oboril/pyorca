@@ -8,7 +8,7 @@ data = OrcaOutput.parse_file('data/neb.out')
 # print(f"{data.duration=}")
 
 
-print(f"{data.calculations[0]}")
+print(f"{data.calculations[0].ts_optimization}")
 
 # print("GEOMETRY OPTIMIZATION CYCLES")
 
