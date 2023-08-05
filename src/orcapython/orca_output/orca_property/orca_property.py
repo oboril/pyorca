@@ -44,14 +44,18 @@ class OrcaProperty:
 
         normal_modes = NormalModes.parse(text)
 
+        thermochemistry = _parse_all_thermochemistry(text)
+
+        nmr = Nmr.parse(text)
+
         data = OrcaProperty(
             atoms=atoms,
             initial_coordinates=initial_coordinates,
             dipole_moment=dipole_moment,
             rotational_constants=rotational_constants,
             normal_modes=normal_modes,
-            thermochemistry=[],
-            nmr=None
+            thermochemistry=thermochemistry,
+            nmr=nmr
         )
 
         return data
@@ -110,3 +114,15 @@ def _parse_rotational_constants(text: str) -> List[float]:
     
     constants = [float(s) for s in found.group(1,2,3)]
     return constants
+
+def _parse_all_thermochemistry(text: str) -> List[Thermochemistry]:
+    """Finds and parses all thermochemical data in `Orca Property Calculation` section"""
+
+    extracted = re.findall(
+        r"THERMOCHEMISTRY AT (?:.*\n)*?For completeness.+\n.+",
+        text
+    )
+
+    result = [Thermochemistry.parse(ext) for ext in extracted]
+
+    return result

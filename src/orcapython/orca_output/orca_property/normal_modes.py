@@ -48,10 +48,12 @@ def _parse_normal_modes(text: str) -> None | List[float]:
     extracted = re.search(
         r"VIBRATIONAL FREQUENCIES(?:.*\n){5}((?:.*cm\*\*-1\n)+)",
         text
-    ).group(1)
+    )
 
     if extracted is None:
         return None
+    
+    extracted = extracted.group(1)
 
     freqs = re.findall(
         r"\d+\:\s+(\-?\d+\.\d+) cm",
@@ -69,10 +71,12 @@ def _parse_ir_spectrum(text: str) -> Tuple[None, None] | Tuple[List[float], List
     extracted = re.search(
         r"IR SPECTRUM(?:.*\n){6}((?:\s*\d+\:.+\n)+)",
         text
-    ).group(1)
+    )
 
     if extracted is None:
         return None, None
+    
+    extracted = extracted.group(1)
 
     spectrum = re.findall(
         r"\d+\:\s+(\-?\d+\.\d+)\s+(\-?\d+\.\d+)",
