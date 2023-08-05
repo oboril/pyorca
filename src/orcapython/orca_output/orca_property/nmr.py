@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
-@dataclass(slots=True, init=True)
+@dataclass(frozen=True, init=True)
 class Nmr:
     """
     Calculated NMR data, such as shifts and coupling constants.

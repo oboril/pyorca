@@ -7,3 +7,5 @@ print(f"{data.input_text=}")
 print(f"{data.terminated_normally=}")
 print(f"{data.duration=}")
 
+
+print(f"{data.calculations=}")

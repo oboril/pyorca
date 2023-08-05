@@ -10,7 +10,7 @@ from orcapython.orca_output.geometry_optimization.geometry_optimization import G
 from orcapython.orca_output.relaxed_scan.relaxed_scan import RelaxedScan
 from orcapython.orca_output.nudged_elastic_bands.nudged_elastic_bands import NudgedElasticBand
 
-@dataclass(slots=True, init=True)
+@dataclass(frozen=True, init=True)
 class OrcaOutput:
     """Summary of ORCA output file"""
 
@@ -41,13 +41,14 @@ class OrcaOutput:
 
         input_filename, input_text = _parse_orca_input(text)
         terminated_normally, duration = _parse_orca_termination(text)
+        calculations = _parse_calculations(text)
 
         data = OrcaOutput(
             input_filename=input_filename,
             input_text=input_text,
             terminated_normally=terminated_normally,
             duration=duration,
-            calculations=[]
+            calculations=calculations
         )
 
         return data
@@ -97,12 +98,33 @@ def _parse_orca_termination(text: str) -> Tuple[bool, datetime]:
     return terminated_normally, timing
 
 _calculation_headings = {
-    r"" : SinglePointCalculation,
-    r"" : GeometryOptimization,
-    r"" : RelaxedScan,
-    r"" : NudgedElasticBand
+    r"\*\s*Single Point Calculation\s*\*" : SinglePointCalculation,
+    r"\*\s*Geometry Optimization Run\s*\*" : GeometryOptimization,
+    r"\*\s*Relaxed Surface Scan\s*\*" : RelaxedScan,
+    r"\-+\n\s*Nudged Elastic Band Calculation\n\-+" : NudgedElasticBand
 }
 
 def _parse_calculations(text: str) -> List[SinglePointCalculation | GeometryOptimization | RelaxedScan | NudgedElasticBand]:
     """Splits the input text into calculations and calls the individual calculation parsers"""
+
+    # list of (start index, calculation)
+    calculation_starts = []
+
+    for pattern, calculation in _calculation_headings.items():
+        matches = re.finditer(pattern, text)
+        for m in matches:
+            calculation_starts.append((m.start(), calculation))
+        
+    calculation_starts.append((len(text)-1, None))
+
+    calculation_starts = sorted(calculation_starts)
+
+    calculations = []
+    for idx in range(len(calculation_starts)-1):
+        calc_text = text[calculation_starts[idx][0]:calculation_starts[idx+1][0]]
+        parsed = calculation_starts[idx][1].parse(calc_text)
+        calculations.append(parsed)
+
+    return parsed
+
 

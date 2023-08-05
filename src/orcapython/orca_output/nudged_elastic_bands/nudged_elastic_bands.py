@@ -4,7 +4,7 @@ from typing import List
 
 from orcapython.orca_output.geometry_optimization.geometry_optimization import GeometryOptimization
 
-@dataclass(slots=True, init=True)
+@dataclass(frozen=True, init=True)
 class NudgedElasticBand:
     """Results from nudged elastic bands calculation"""
 

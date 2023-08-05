@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Tuple
 
-@dataclass(slots=True, init=True)
+@dataclass(frozen=True, init=True)
 class ElectronicSpectrum:
     """Calculated energies and intensities for electronic transitions"""
 

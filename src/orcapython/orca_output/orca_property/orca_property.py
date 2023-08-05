@@ -1,3 +1,4 @@
+from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Optional
 
@@ -5,7 +6,7 @@ from orcapython.orca_output.orca_property.normal_modes import NormalModes
 from orcapython.orca_output.orca_property.thermochemistry import Thermochemistry
 from orcapython.orca_output.orca_property.nmr import Nmr
 
-@dataclass(slots=True, init=True)
+@dataclass(frozen=True, init=True)
 class OrcaProperty:
     """Results of `Orca Property Calculation`"""
     
@@ -26,4 +27,18 @@ class OrcaProperty:
 
     nmr : Nmr | None
     """NMR shifts and coupling constants, if calculated"""
+
+    def find_and_parse(text: str) -> OrcaProperty:
+        """Finds and parses part of the ORCA output text containing information from Orca Property Calculation"""
+
+        data = OrcaProperty(
+            atoms=None,
+            dipole_moment=None,
+            rotational_constants=None,
+            normal_modes=None,
+            thermochemistry=[],
+            nmr=None
+        )
+
+        return data
 

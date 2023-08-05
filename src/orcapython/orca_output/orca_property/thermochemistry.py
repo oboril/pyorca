@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-@dataclass(slots=True, init=True)
+@dataclass(frozen=True, init=True)
 class Thermochemistry:
     """
     Results of thermochemistry calculations at single temperature.
