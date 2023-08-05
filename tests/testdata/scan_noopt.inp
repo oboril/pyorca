@@ -1,6 +1,0 @@
-! PM3 SP
-%geom Scan
-B 0 1 [1.5 1.7 2.0 2.5 3.0]
-end
-end
-* xyzfile -1 1 reactant.xyz
