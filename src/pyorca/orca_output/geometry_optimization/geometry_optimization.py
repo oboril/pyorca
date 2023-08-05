@@ -30,10 +30,15 @@ class GeometryOptimization(OrcaProperty):
 
         final_energy = _find_final_energy(text)
 
+        atoms, final_coordinates = _find_final_coordinates(text)
+        assert(all([a1 == a2 for a1,a2 in zip(orca_props.atoms, atoms)]))
+
+        cycles = _parse_optimization_cycles(text)
+
         data = GeometryOptimization(
             **orca_props.__dict__,
-            cycles=None,
-            final_coordinates=None,
+            cycles=cycles,
+            final_coordinates=final_coordinates,
             converged=converged,
             final_energy=final_energy,
         )
@@ -65,12 +70,43 @@ def _find_final_energy(text: str) -> float:
     
     return float(energies[-1])*hartree
 
-def _find_final_coordinates(text: str) -> float:
+def _find_final_coordinates(text: str) -> Tuple[List[str], List[List[float]]]:
     """Finds the last entry of cartesian coordinates"""
-    energies = re.findall(
-        r"FINAL SINGLE POINT ENERGY\s+(\-?\d+\.\d+)",
+    coords = re.findall(
+        COORDINATES_REGEX,
         text
     )
     
-    return float(energies[-1])*hartree
+    last_coords = coords[-1]
+
+    atoms, coords = parse_coordinates(last_coords)
+
+    return atoms, coords
+
+def _parse_optimization_cycles(text: str) -> List[OptimizationCycle]:
+    """Splits the input and passes the individual cycles to OptimizationCycle.parse"""
+
+    cycle_starts = re.finditer(
+        r"GEOMETRY OPTIMIZATION CYCLE\s+\d+",
+        text
+    )
+
+    converged = re.search(
+        r"THE OPTIMIZATION HAS CONVERGED",
+        text
+    )
+
+    if converged is None:
+        end = len(text)
+    else:
+        end = converged.endpos
+
+    segments = [cs.start() for cs in cycle_starts] + [end]
+
+    cycles = []
+    for start, end in zip(segments[:-1], segments[1:]):
+        cycle = OptimizationCycle.parse(text[start:end])
+        cycles.append(cycle)
+
+    return cycles
 

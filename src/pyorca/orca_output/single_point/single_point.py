@@ -19,7 +19,6 @@ class SinglePointCalculation(OrcaProperty):
         """Parses part of ORCA output text containing information about geometry optimization"""
 
         orca_props = OrcaProperty.find_and_parse(text)
-        print(orca_props)
 
         population_analysis = PopulationAnalysis.parse(text)
         electronic_spectrum = ElectronicSpectrum.parse(text)
