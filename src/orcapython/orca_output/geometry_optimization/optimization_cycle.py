@@ -2,7 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List
 
-@dataclass(slots=True, init=True)
+@dataclass(frozen=True, init=True)
 class OptimizationCycle:
     """Information about individual geometry optimization cycle."""
 
