@@ -22,11 +22,12 @@ class SinglePointCalculation(OrcaProperty):
         print(orca_props)
 
         population_analysis = PopulationAnalysis.parse(text)
+        electronic_spectrum = ElectronicSpectrum.parse(text)
 
         data = SinglePointCalculation(
             **orca_props.__dict__,
             population_analysis=population_analysis,
-            electronic_spectrum=None
+            electronic_spectrum=electronic_spectrum
         )
 
         return data

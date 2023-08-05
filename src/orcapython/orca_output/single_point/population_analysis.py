@@ -19,8 +19,11 @@ class BondOrder:
 class PopulationAnalysis:
     """Electronic population analysis information"""
 
-    charge_mulliken : List[float]
-    """Mulliken gross atomic charge"""
+    charges_mulliken : List[float]
+    """Mulliken atomic charges"""
+
+    charges_loewdin : List[float]
+    """Loewdin atomic charges"""
 
     bond_orders : List[BondOrder]
     """Reported Mayer bond orders"""
@@ -28,12 +31,15 @@ class PopulationAnalysis:
     def parse(text: str) -> PopulationAnalysis:
         """Finds and parses population analysis data"""
 
-        charge_mulliken = _parse_charge_mulliken(text)
+        charges_mulliken = _parse_charge_mulliken(text)
+
+        charges_loewdin = _parse_charge_loewdin(text)
 
         bond_orders = _parse_mayer_bond_order(text)
 
         data = PopulationAnalysis(
-            charge_mulliken=charge_mulliken,
+            charges_mulliken=charges_mulliken,
+            charges_loewdin=charges_loewdin,
             bond_orders=bond_orders
         )
 
@@ -47,6 +53,24 @@ def _parse_charge_mulliken(text: str) -> List[float]:
     """Finds and parses Mulliken charges"""
     extract = re.search(
         r"MULLIKEN ATOMIC CHARGES(?:.*\n)*?Sum of atomic charges",
+        text
+    )
+    if extract is None:
+        return None
+    extract = extract.group(0)
+
+    charges = re.findall(
+        r"\d+\s+\w+\s*\:\s+(\-?\d+\.\d+)",
+        extract
+    )
+
+    return [float(ch) for ch in charges]
+
+
+def _parse_charge_loewdin(text: str) -> List[float]:
+    """Finds and parses Loewdin charges"""
+    extract = re.search(
+        r"LOEWDIN ATOMIC CHARGES\n\-+(?:\s*\d+\s*\w+\s*\:.*\n)*",
         text
     )
     if extract is None:
