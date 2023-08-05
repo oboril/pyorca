@@ -26,12 +26,41 @@ class GeometryOptimization(OrcaProperty):
 
         orca_props = OrcaProperty.find_and_parse(text)
 
+        converged = _optimization_converged(text)
+
+        final_energy = _find_final_energy(text)
+
         data = GeometryOptimization(
             **orca_props.__dict__,
             cycles=None,
             final_coordinates=None,
-            converged=None,
-            final_energy=None,
+            converged=converged,
+            final_energy=final_energy,
         )
 
         return data
+
+### HELPER FUNCTIONS
+
+import re
+from orcapython.constants import hartree
+
+def _optimization_converged(text: str) -> bool:
+    """Tries to find the `Optimization Converged` message"""
+
+    converged = re.search(
+        r"THE OPTIMIZATION HAS CONVERGED",
+        text
+    ) is not None
+
+    return converged
+
+def _find_final_energy(text: str) -> float:
+    """Finds the last Single Point Energy value"""
+    energies = re.findall(
+        r"FINAL SINGLE POINT ENERGY\s+(\-?\d+\.\d+)",
+        text
+    )
+    
+    return float(energies[-1])*hartree
+

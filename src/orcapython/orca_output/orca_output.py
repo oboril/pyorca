@@ -127,6 +127,6 @@ def _parse_calculations(text: str) -> List[SinglePointCalculation | GeometryOpti
         parsed = calculation_starts[idx][1].parse(calc_text)
         calculations.append(parsed)
 
-    return parsed
+    return calculations
 
 
