@@ -24,8 +24,15 @@ GeometryOptimization
     :inherited-members:
 
 RelaxedScan
---------------------
+-----------
 
-.. autoclass:: pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization
+.. autoclass:: pyorca.orca_output.relaxed_scan.relaxed_scan.RelaxedScan
+    :members:
+    :inherited-members:
+
+NudgedElasticBands
+------------------
+
+.. autoclass:: pyorca.orca_output.relaxed_scan.relaxed_scan.RelaxedScan
     :members:
     :inherited-members:

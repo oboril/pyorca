@@ -7,7 +7,7 @@ from datetime import timedelta
 from pyorca.orca_output.single_point.single_point import SinglePointCalculation
 from pyorca.orca_output.geometry_optimization.geometry_optimization import GeometryOptimization
 from pyorca.orca_output.relaxed_scan.relaxed_scan import RelaxedScan
-from pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands import NudgedElasticBand
+from pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands import NudgedElasticBands
 
 @dataclass(frozen=True, init=True)
 class OrcaOutput:
@@ -25,7 +25,7 @@ class OrcaOutput:
     duration : datetime | None
     """The duration of the program execution, may not be available if ORCA terminates with an error"""
 
-    calculations : List[SinglePointCalculation | GeometryOptimization | RelaxedScan | NudgedElasticBand]
+    calculations : List[SinglePointCalculation | GeometryOptimization | RelaxedScan | NudgedElasticBands]
     """Summary of all calculations from the output file"""
 
     def parse_file(path: str) -> OrcaOutput:
@@ -103,10 +103,10 @@ _calculation_headings = {
     r"\*\s*Single Point Calculation\s*\*" : SinglePointCalculation,
     r"\*\s*Geometry Optimization Run\s*\*" : GeometryOptimization,
     r"\*\s*Relaxed Surface Scan\s*\*" : RelaxedScan,
-    r"\-+\n\s*Nudged Elastic Band Calculation\n\-+" : NudgedElasticBand
+    r"\-+\n\s*Nudged Elastic Band Calculation\n\-+" : NudgedElasticBands
 }
 
-def _parse_calculations(text: str) -> List[SinglePointCalculation | GeometryOptimization | RelaxedScan | NudgedElasticBand]:
+def _parse_calculations(text: str) -> List[SinglePointCalculation | GeometryOptimization | RelaxedScan | NudgedElasticBands]:
     """Splits the input text into calculations and calls the individual calculation parsers"""
 
     # list of (start index, calculation)

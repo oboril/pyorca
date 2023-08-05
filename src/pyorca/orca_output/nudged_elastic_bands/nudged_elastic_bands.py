@@ -7,7 +7,7 @@ from pyorca.orca_output.orca_property.orca_property import OrcaProperty
 from pyorca.orca_output.nudged_elastic_bands.settings import NebSettings
 
 @dataclass(frozen=True, init=True)
-class NudgedElasticBand(OrcaProperty):
+class NudgedElasticBands(OrcaProperty):
     """Results from nudged elastic bands calculation"""
 
     converged: bool
@@ -31,7 +31,7 @@ class NudgedElasticBand(OrcaProperty):
     image_energies : List[float]
     """Energies of the individual images in kJ/mol"""
 
-    def parse(text: str) -> NudgedElasticBand:
+    def parse(text: str) -> NudgedElasticBands:
         """Parses the Nudged Elastic Bands data from ORCA output text"""
 
         orca_props = OrcaProperty.find_and_parse(text)
@@ -44,7 +44,7 @@ class NudgedElasticBand(OrcaProperty):
 
         reactant_optimization, product_optimization, ts_optimization = _parse_neb_data(text)
 
-        data = NudgedElasticBand(
+        data = NudgedElasticBands(
             **orca_props.__dict__,
             converged=converged,
             settings=settings,
