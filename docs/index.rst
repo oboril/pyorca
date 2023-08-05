@@ -6,12 +6,12 @@
 Welcome to OrcaPython's documentation!
 ======================================
 
-.. automodule:: orcapython
+.. automodule:: pyorca
 
 Reading ORCA output file
 ------------------------
 
-.. autoclass:: orcapython.OrcaOutput
+.. autoclass:: pyorca.OrcaOutput
 
 Autgenerated docs
 -----------------

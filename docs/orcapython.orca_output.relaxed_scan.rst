@@ -1,13 +1,13 @@
-orcapython.orca\_output.relaxed\_scan package
+pyorca.orca\_output.relaxed\_scan package
 =============================================
 
 Submodules
 ----------
 
-orcapython.orca\_output.relaxed\_scan.relaxed\_scan module
+pyorca.orca\_output.relaxed\_scan.relaxed\_scan module
 ----------------------------------------------------------
 
-.. automodule:: orcapython.orca_output.relaxed_scan.relaxed_scan
+.. automodule:: pyorca.orca_output.relaxed_scan.relaxed_scan
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ orcapython.orca\_output.relaxed\_scan.relaxed\_scan module
 Module contents
 ---------------
 
-.. automodule:: orcapython.orca_output.relaxed_scan
+.. automodule:: pyorca.orca_output.relaxed_scan
    :members:
    :undoc-members:
    :show-inheritance:

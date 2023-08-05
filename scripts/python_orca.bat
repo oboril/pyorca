@@ -1,4 +1,4 @@
-:: Runs python script with the orcapython package included
+:: Runs python script with the pyorca package included
 
 @echo off
 set PYTHONPATH=%~dp0../src/

@@ -7,4 +7,4 @@ This package provides intuitive Python interface for quantum calculations using 
 TODO: add more description and examples
 """
 
-from orcapython.orca_output.orca_output import OrcaOutput
+from pyorca.orca_output.orca_output import OrcaOutput

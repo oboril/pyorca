@@ -2,7 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List
 
-from orcapython.orca_output.geometry_optimization.geometry_optimization import GeometryOptimization
+from pyorca.orca_output.geometry_optimization.geometry_optimization import GeometryOptimization
 
 @dataclass(frozen=True, init=True)
 class NudgedElasticBand:

@@ -2,8 +2,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List
 
-from orcapython.orca_output.geometry_optimization.optimization_cycle import OptimizationCycle
-from orcapython.orca_output.orca_property.orca_property import OrcaProperty
+from pyorca.orca_output.geometry_optimization.optimization_cycle import OptimizationCycle
+from pyorca.orca_output.orca_property.orca_property import OrcaProperty
 
 @dataclass(frozen=True, init=True)
 class GeometryOptimization(OrcaProperty):
@@ -43,7 +43,8 @@ class GeometryOptimization(OrcaProperty):
 ### HELPER FUNCTIONS
 
 import re
-from orcapython.constants import hartree
+from pyorca.constants import hartree
+from pyorca.orca_output.coordinates import COORDINATES_REGEX, parse_coordinates
 
 def _optimization_converged(text: str) -> bool:
     """Tries to find the `Optimization Converged` message"""
@@ -57,6 +58,15 @@ def _optimization_converged(text: str) -> bool:
 
 def _find_final_energy(text: str) -> float:
     """Finds the last Single Point Energy value"""
+    energies = re.findall(
+        r"FINAL SINGLE POINT ENERGY\s+(\-?\d+\.\d+)",
+        text
+    )
+    
+    return float(energies[-1])*hartree
+
+def _find_final_coordinates(text: str) -> float:
+    """Finds the last entry of cartesian coordinates"""
     energies = re.findall(
         r"FINAL SINGLE POINT ENERGY\s+(\-?\d+\.\d+)",
         text

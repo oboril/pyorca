@@ -1,13 +1,13 @@
-orcapython.orca\_output.nudged\_elastic\_bands package
+pyorca.orca\_output.nudged\_elastic\_bands package
 ======================================================
 
 Submodules
 ----------
 
-orcapython.orca\_output.nudged\_elastic\_bands.nudged\_elastic\_bands module
+pyorca.orca\_output.nudged\_elastic\_bands.nudged\_elastic\_bands module
 ----------------------------------------------------------------------------
 
-.. automodule:: orcapython.orca_output.nudged_elastic_bands.nudged_elastic_bands
+.. automodule:: pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ orcapython.orca\_output.nudged\_elastic\_bands.nudged\_elastic\_bands module
 Module contents
 ---------------
 
-.. automodule:: orcapython.orca_output.nudged_elastic_bands
+.. automodule:: pyorca.orca_output.nudged_elastic_bands
    :members:
    :undoc-members:
    :show-inheritance:

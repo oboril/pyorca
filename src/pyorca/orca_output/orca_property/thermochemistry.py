@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 import re
 
-from orcapython.constants import hartree
+from pyorca.constants import hartree
 
 @dataclass(frozen=True, init=True)
 class Thermochemistry:

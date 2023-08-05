@@ -2,9 +2,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Optional
 
-from orcapython.orca_output.orca_property.normal_modes import NormalModes
-from orcapython.orca_output.orca_property.thermochemistry import Thermochemistry
-from orcapython.orca_output.orca_property.nmr import Nmr
+from pyorca.orca_output.orca_property.normal_modes import NormalModes
+from pyorca.orca_output.orca_property.thermochemistry import Thermochemistry
+from pyorca.orca_output.orca_property.nmr import Nmr
 
 @dataclass(frozen=True, init=True)
 class OrcaProperty:
@@ -64,7 +64,7 @@ class OrcaProperty:
 
 import re
 
-from orcapython.orca_output.coordinates import COORDINATES_REGEX, parse_coordinates
+from pyorca.orca_output.coordinates import COORDINATES_REGEX, parse_coordinates
 
 def _parse_init_coords(text: str):
     """Returns the first coordinates from the text"""

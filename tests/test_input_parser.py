@@ -1,4 +1,4 @@
-from orcapython import OrcaOutput
+from pyorca import OrcaOutput
 
 data = OrcaOutput.parse_file('data/CH4_UVVIS.out')
 

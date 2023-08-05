@@ -1,9 +1,9 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
-from orcapython.orca_output.orca_property.orca_property import OrcaProperty
-from orcapython.orca_output.single_point.population_analysis import PopulationAnalysis
-from orcapython.orca_output.single_point.electronic_spectrum import ElectronicSpectrum
+from pyorca.orca_output.orca_property.orca_property import OrcaProperty
+from pyorca.orca_output.single_point.population_analysis import PopulationAnalysis
+from pyorca.orca_output.single_point.electronic_spectrum import ElectronicSpectrum
 
 @dataclass(frozen=True, init=True)
 class SinglePointCalculation(OrcaProperty):

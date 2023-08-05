@@ -4,10 +4,10 @@ from typing import List
 
 from datetime import timedelta
 
-from orcapython.orca_output.single_point.single_point import SinglePointCalculation
-from orcapython.orca_output.geometry_optimization.geometry_optimization import GeometryOptimization
-from orcapython.orca_output.relaxed_scan.relaxed_scan import RelaxedScan
-from orcapython.orca_output.nudged_elastic_bands.nudged_elastic_bands import NudgedElasticBand
+from pyorca.orca_output.single_point.single_point import SinglePointCalculation
+from pyorca.orca_output.geometry_optimization.geometry_optimization import GeometryOptimization
+from pyorca.orca_output.relaxed_scan.relaxed_scan import RelaxedScan
+from pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands import NudgedElasticBand
 
 @dataclass(frozen=True, init=True)
 class OrcaOutput:

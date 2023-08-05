@@ -1,4 +1,4 @@
-orcapython package
+pyorca package
 ==================
 
 Subpackages
@@ -7,15 +7,15 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   orcapython.orca_output
+   pyorca.orca_output
 
 Submodules
 ----------
 
-orcapython.constants module
+pyorca.constants module
 ---------------------------
 
-.. automodule:: orcapython.constants
+.. automodule:: pyorca.constants
    :members:
    :undoc-members:
    :show-inheritance:
@@ -23,7 +23,7 @@ orcapython.constants module
 Module contents
 ---------------
 
-.. automodule:: orcapython
+.. automodule:: pyorca
    :members:
    :undoc-members:
    :show-inheritance:
