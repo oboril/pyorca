@@ -6,19 +6,10 @@ from orcapython.orca_output.single_point.electronic_spectrum import ElectronicSp
 
 @dataclass(slots=True, init=True)
 class SinglePointCalculation(OrcaProperty):
-    """
-    Results of single point calculation
-
-    Attributes
-    ----------
+    """Results of single point calculation"""
 
     population_analysis : PopulationAnalysis
-        Atomic charges and bond orders
+    """Atomic charges and bond orders"""
 
     electronic_spectrum : ElectronicSpectrum | None
-        UV-VIS transition energies and intensities, if calculated
-
-    """
-
-    population_analysis : PopulationAnalysis
-    electronic_spectrum : ElectronicSpectrum | None
+    """UV-VIS transition energies and intensities, if calculated"""

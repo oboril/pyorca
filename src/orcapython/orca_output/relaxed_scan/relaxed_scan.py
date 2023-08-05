@@ -6,15 +6,7 @@ from orcapython.orca_output.geometry_optimization.geometry_optimization import G
 
 @dataclass(slots=True, init=True)
 class RelaxedScan:
-    """
-    Results from relaxed surface scan calculation
-
-    Attributes
-    ----------
-    
-    steps : List[GeometryOptimization]
-        Results from individual constrained optimizations
-
-    """
+    """Results from relaxed surface scan calculation"""
 
     steps : List[GeometryOptimization]
+    """Results from individual constrained optimizations"""

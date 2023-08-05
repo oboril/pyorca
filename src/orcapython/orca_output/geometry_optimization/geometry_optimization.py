@@ -7,27 +7,16 @@ from orcapython.orca_output.orca_property.orca_property import OrcaProperty
 
 @dataclass(slots=True, init=True)
 class GeometryOptimization(OrcaProperty):
-    """
-    Information about geometry optimization cycles and final evaluation.
-
-    Attributes
-    ----------
+    """Information about geometry optimization cycles and final evaluation."""
 
     cycles : List[OptimizationCycle]
-        Individual Optimization cycles
-    
+    """Individual Optimization cycles"""
+
     final_coordinates : List[List[float]]
-        Final cartesian coordinates in Angstroem, `coordinates[atom_idx][axis]`
+    """Final cartesian coordinates in Angstroem, `coordinates[atom_idx][axis]`"""
 
     converged : bool
-        Whether the optimization reached stationary point
-    
-    final_energy : float
-        Final energy in kJ/mol
-    
-    """
+    """Whether the optimization reached stationary point"""
 
-    cycles : List[OptimizationCycle]
-    final_coordinates : List[List[float]]
-    converged : bool
     final_energy : float
+    """Final energy in kJ/mol"""

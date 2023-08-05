@@ -3,23 +3,13 @@ from typing import List, Tuple
 
 @dataclass(slots=True, init=True)
 class NormalModes:
-    """
-    Contains data from harmonic vibrational modes.
-
-    Attributes
-    ----------
-
+    """Contains data from harmonic vibrational modes"""
+    
     normal_modes : List[float]
-        frequencies of normal modes in cm^-1
+    """Frequencies of normal modes in cm^-1"""
 
     ir_frequencies : List[float]
-        frequencies of vibrational modes
+    """Frequencies of vibrational modes"""
     
     ir_extinction : List[float]
-        extinction coefficients of vibrational modes
-    
-    """
-    
-    normal_modes: List[float]
-    ir_frequencies: List[float]
-    ir_extinction: List[float]
+    """Extinction coefficients of vibrational modes"""
