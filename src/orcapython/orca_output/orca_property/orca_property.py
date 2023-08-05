@@ -42,12 +42,14 @@ class OrcaProperty:
 
         rotational_constants = _parse_rotational_constants(text)
 
+        normal_modes = NormalModes.parse(text)
+
         data = OrcaProperty(
             atoms=atoms,
             initial_coordinates=initial_coordinates,
             dipole_moment=dipole_moment,
             rotational_constants=rotational_constants,
-            normal_modes=None,
+            normal_modes=normal_modes,
             thermochemistry=[],
             nmr=None
         )

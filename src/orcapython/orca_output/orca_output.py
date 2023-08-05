@@ -3,7 +3,6 @@ from dataclasses import dataclass
 from typing import List
 
 from datetime import timedelta
-import re
 
 from orcapython.orca_output.single_point.single_point import SinglePointCalculation
 from orcapython.orca_output.geometry_optimization.geometry_optimization import GeometryOptimization
@@ -53,6 +52,9 @@ class OrcaOutput:
 
         return data
 
+### HELPER FUNCTIONS
+
+import re
 
 def _parse_orca_input(text: str) -> Tuple[str, str]:
     """Parses the input filename and input text from ORCA output file"""
@@ -95,7 +97,7 @@ def _parse_orca_termination(text: str) -> Tuple[bool, datetime]:
     d,h,m,s,ms = [int(s) for s in timing.group(1,2,3,4,5)]
     duration = timedelta(days=d, hours=h, minutes=m, seconds=s, milliseconds=ms)
 
-    return terminated_normally, timing
+    return terminated_normally, duration
 
 _calculation_headings = {
     r"\*\s*Single Point Calculation\s*\*" : SinglePointCalculation,
