@@ -6,6 +6,16 @@
 Welcome to OrcaPython's documentation!
 ======================================
 
+.. automodule:: orcapython
+
+Reading ORCA output file
+------------------------
+
+.. autoclass:: orcapython.OrcaOutput
+
+Autgenerated docs
+-----------------
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
