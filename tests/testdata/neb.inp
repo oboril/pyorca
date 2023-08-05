@@ -1,0 +1,6 @@
+!PBE DEF2-SV(P) RI def2/J D4 NEB-TS FREQ
+%NEB
+    NEB_END_XYZFILE "product.xyz"
+    PREOPT_ENDS TRUE
+END
+* XYZfile -1 1 reactant.xyz
