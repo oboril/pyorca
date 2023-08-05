@@ -1,3 +1,4 @@
+from __future__ import annotations
 from dataclasses import dataclass
 
 from orcapython.orca_output.orca_property.orca_property import OrcaProperty
@@ -13,3 +14,17 @@ class SinglePointCalculation(OrcaProperty):
 
     electronic_spectrum : ElectronicSpectrum | None
     """UV-VIS transition energies and intensities, if calculated"""
+
+    def parse(text: str) -> SinglePointCalculation:
+        """Parses part of ORCA output text containing information about geometry optimization"""
+
+        orca_props = OrcaProperty.find_and_parse(text)
+        print(orca_props)
+
+        data = SinglePointCalculation(
+            **orca_props.__dict__,
+            population_analysis=None,
+            electronic_spectrum=None
+        )
+
+        return data

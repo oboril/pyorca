@@ -25,7 +25,6 @@ class GeometryOptimization(OrcaProperty):
         """Parses part of ORCA output text containing information about geometry optimization"""
 
         orca_props = OrcaProperty.find_and_parse(text)
-        print(orca_props)
 
         data = GeometryOptimization(
             **orca_props.__dict__,
