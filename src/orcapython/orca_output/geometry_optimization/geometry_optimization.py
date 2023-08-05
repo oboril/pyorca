@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from typing import List
 
 from orcapython.orca_output.geometry_optimization.optimization_cycle import OptimizationCycle
+from orcapython.orca_output.orca_property.orca_property import OrcaProperty
 
 @dataclass(slots=True, init=True)
 class GeometryOptimization(OrcaProperty):
