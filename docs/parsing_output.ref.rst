@@ -33,6 +33,6 @@ RelaxedScan
 NudgedElasticBands
 ------------------
 
-.. autoclass:: pyorca.orca_output.relaxed_scan.relaxed_scan.RelaxedScan
+.. autoclass:: pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands
     :members:
     :inherited-members:
