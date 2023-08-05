@@ -1,6 +1,6 @@
 from pyorca import OrcaOutput
 
-data = OrcaOutput.parse_file('data/scan.out')
+data = OrcaOutput.parse_file('data/neb.out')
 
 # print(f"{data.input_filename=}")
 # print(f"{data.input_text=}")
@@ -8,10 +8,7 @@ data = OrcaOutput.parse_file('data/scan.out')
 # print(f"{data.duration=}")
 
 
-print(f"{data.calculations=}")
-
-energies = [step.final_energy for step in data.calculations[0].steps]
-print(energies)
+print(f"{data.calculations[0]}")
 
 # print("GEOMETRY OPTIMIZATION CYCLES")
 

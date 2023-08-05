@@ -11,6 +11,10 @@ class RelaxedScan:
     steps : List[GeometryOptimization]
     """Results from individual constrained optimizations"""
 
+    def __iter__(self):
+        """Returns iterator that iterates though the Relaxed Surface Scan Steps"""
+        return iter(self.steps)
+
     def parse(text: str) -> RelaxedScan:
         """Parses the relaxed surface scan data from the text from ORCA output file"""
 

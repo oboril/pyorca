@@ -6,7 +6,7 @@ from pyorca.orca_output.geometry_optimization.optimization_cycle import Optimiza
 from pyorca.orca_output.orca_property.orca_property import OrcaProperty
 
 @dataclass(frozen=True, init=True)
-class GeometryOptimization(OrcaProperty):
+class GeometryOptimization:
     """Information about geometry optimization cycles and final evaluation."""
 
     cycles : List[OptimizationCycle]
@@ -21,6 +21,13 @@ class GeometryOptimization(OrcaProperty):
     final_energy : float
     """Final energy in kJ/mol"""
 
+    orca_property : OrcaProperty | None
+    """Results from Orca Property Calculation, if present"""
+
+    def __iter__(self):
+        """Returns iterator that iterates though the Geometry Optimization Cycles"""
+        return iter(self.cycles)
+
     def parse(text: str) -> GeometryOptimization:
         """Parses part of ORCA output text containing information about geometry optimization"""
 
@@ -31,12 +38,12 @@ class GeometryOptimization(OrcaProperty):
         final_energy = _find_final_energy(text)
 
         atoms, final_coordinates = _find_final_coordinates(text)
-        assert(all([a1 == a2 for a1,a2 in zip(orca_props.atoms, atoms)]))
+        # assert(all([a1 == a2 for a1,a2 in zip(orca_props.atoms, atoms)]))
 
         cycles = _parse_optimization_cycles(text)
 
         data = GeometryOptimization(
-            **orca_props.__dict__,
+            orca_property=orca_props,
             cycles=cycles,
             final_coordinates=final_coordinates,
             converged=converged,

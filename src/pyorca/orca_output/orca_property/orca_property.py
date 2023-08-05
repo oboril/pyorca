@@ -31,12 +31,14 @@ class OrcaProperty:
     nmr : Nmr | None
     """NMR shifts and coupling constants, if calculated"""
 
-    def find_and_parse(text: str) -> OrcaProperty:
+    def find_and_parse(text: str) -> OrcaProperty | None:
         """Finds and parses part of the ORCA output text containing information from Orca Property Calculation"""
 
-        atoms, initial_coordinates = _parse_init_coords(text)
-
         text = _extract_orca_prop_calc(text)
+        if text is None:
+            return None
+
+        atoms, initial_coordinates = _parse_init_coords(text)
 
         dipole_moment = _parse_dipole_moment(text)
 
@@ -78,15 +80,18 @@ def _parse_init_coords(text: str):
 
     return atoms, initial_coordinates
 
-def _extract_orca_prop_calc(text: str) -> str:
+def _extract_orca_prop_calc(text: str) -> str | None:
     """Crops the string so that Orca Property Calculation is at the start"""
 
     start = re.search(
         r"\*+\s+\*\s*ORCA property calculations\s*\*\s+\*+",
         text
-    ).start()
+    )
+    
+    if start is None:
+        return None
 
-    return text[start:]
+    return text[start.start():]
 
 def _parse_dipole_moment(text: str) -> float:
     """Finds and parses dipole moment in Debye"""
