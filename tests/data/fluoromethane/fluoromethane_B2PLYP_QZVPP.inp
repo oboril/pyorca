@@ -1,0 +1,3 @@
+! OPT B2PLYP NORI def2-QZVPP VeryTightOpt
+
+* xyzfile 0 1 fluoromethane.xyz

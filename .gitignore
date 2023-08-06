@@ -1,6 +1,5 @@
 *__pycache__*
-*/testdata/runtime
-*/data/runtime
+*runtime*
 _old*
 docs/_build/*
 docs/_build

@@ -16,7 +16,7 @@ def read_xyz(text: str) -> Tuple[List[str], np.array, str]:
 
     for idx, line in enumerate(lines[2:]):
 
-        if idx+2 == n_atoms:
+        if idx == n_atoms:
             break
 
         atom = re.findall(r'[a-zA-Z]+', line)[0]

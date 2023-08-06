@@ -4,7 +4,7 @@ import numpy as np
 
 from typing import List
 
-from orcapython.xyz import read_xyz
+from pyorca.geometry import read_xyz
 
 def align_xyz_files(path1 : str, path2 : str) -> float:
     """Aligns molecules from .xyz files and returns the RMSD"""

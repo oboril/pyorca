@@ -8,3 +8,4 @@ TODO: add more description and examples
 """
 
 from pyorca.orca_output.orca_output import OrcaOutput
+import  pyorca.geometry
