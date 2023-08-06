@@ -29,7 +29,15 @@ Look into the examples below to explore how to use PyORCA.
 
 .. toctree::
    :maxdepth: 1
-   :caption: Geometry Module
+   :caption: 3D structures
 
    geometry.example
    geometry.ref
+   conformers.ref
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Automated Workflows
+
+   automatic_nmr
+   orca_interface.ref

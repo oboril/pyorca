@@ -24,7 +24,7 @@ class OrcaCommandResult:
     basename : str
     """Name of the calculation, without .inp extension"""
 
-def run_orca(input_path) -> OrcaCommandResult:
+def run_orca(input_path : str) -> OrcaCommandResult:
     """
     Runs ORCA calculation with the specified input file.
     
