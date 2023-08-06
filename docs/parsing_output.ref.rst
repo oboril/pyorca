@@ -29,6 +29,13 @@ Nmr
     :members:
     :inherited-members:
 
+NmrShift
+--------------------
+
+.. autoclass:: pyorca.orca_output.orca_property.nmr.NmrShift
+    :members:
+    :inherited-members:
+
 NormalModes
 --------------------
 

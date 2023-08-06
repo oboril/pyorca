@@ -37,6 +37,7 @@ def run_orca(input_path) -> OrcaCommandResult:
 
     inp_file = os.path.join(runtime_path, inpname)
     out_file = os.path.join(dir_path, name+'.out')
+    shutil.copy(input_path, inp_file)
     status, message = _run_orca(inp_file, out_file)
 
     result = OrcaCommandResult(

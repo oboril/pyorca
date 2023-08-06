@@ -32,6 +32,17 @@ class Nmr:
         )
 
         return data
+    
+    def calibrate_shifts(self, standards: Dict[str, float]):
+        """
+        Adjusts the NMR shifts according to `s(reported) = s(standard) - s(calculated)`
+
+        The `standards` parameter should map [atom symbol] -> [shift of standard]
+        """
+
+        for i in range(len(self.shifts)):
+            if self.shifts[i].atom in standards:
+                self.shifts[i].shift = standards[self.shifts[i].atom] - self.shifts[i].shift
 
 @dataclass(init=True)
 class NmrShift:

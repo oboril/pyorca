@@ -13,7 +13,7 @@ class GeometryOptimization(OrcaProperty):
     cycles : List[OptimizationCycle]
     """Individual Optimization cycles"""
 
-    final_single_point: SinglePointEvaluation
+    final_single_point: SinglePointCalculation
     """Final evaluation at the stationary point"""
 
     converged : bool
