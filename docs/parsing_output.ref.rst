@@ -1,5 +1,5 @@
 PyORCA.orca_output reference
-========================
+============================
 
 ElectronicSpectrum
 ----------------------

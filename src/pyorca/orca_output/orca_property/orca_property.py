@@ -31,14 +31,14 @@ class OrcaProperty:
     nmr : Nmr | None
     """NMR shifts and coupling constants, if calculated"""
 
-    def find_and_parse(text: str) -> OrcaProperty | None:
+    def find_and_parse(text: str) -> OrcaProperty:
         """Finds and parses part of the ORCA output text containing information from Orca Property Calculation"""
+
+        atoms, initial_coordinates = _parse_init_coords(text)
 
         text = _extract_orca_prop_calc(text)
         if text is None:
-            return None
-
-        atoms, initial_coordinates = _parse_init_coords(text)
+            return OrcaProperty(atoms, initial_coordinates, None, None, None, None, None)
 
         dipole_moment = _parse_dipole_moment(text)
 

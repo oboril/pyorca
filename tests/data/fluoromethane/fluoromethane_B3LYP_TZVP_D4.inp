@@ -1,0 +1,3 @@
+! OPT B3LYP def2-TZVP D4 TightOpt
+
+* xyzfile 0 1 fluoromethane.xyz

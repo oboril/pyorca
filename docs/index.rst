@@ -26,3 +26,10 @@ Look into the examples below to explore how to use PyORCA.
    parsing_output.sp
    parsing_output.opt
    parsing_output.ref
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Geometry Module
+
+   geometry.example
+   geometry.ref

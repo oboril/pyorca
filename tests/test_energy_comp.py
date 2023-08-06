@@ -13,6 +13,7 @@ calculated = [
     ("BLYP/def2-SVP", "fluoromethane_BLYP_SVP.out"),
     ("B3LYP/def2-SVP", "fluoromethane_B3LYP_SVP.out"),
     ("B3LYP/def2-TZVP", "fluoromethane_B3LYP_TZVP.out"),
+    ("B3LYP/def2-TZVP/D4", "fluoromethane_B3LYP_TZVP_D4.out"),
     ("B2PLYP/def2-TZVP", "fluoromethane_B2PLYP_TZVP.out"),
     ("B2PLYP/def2-QZVPP", "fluoromethane_B2PLYP_QZVPP.out"),
 ]
@@ -32,7 +33,7 @@ def calc_descriptors(exp_geometry, other_geometry):
     return rmds, CF_dist, CH_dist, HCH_angl
 
 # Define template for printing nice table
-template = '{: <18} {: <10.3f} {: <10.3f} {: <10.3f} {: <10.3f} {: ^15}'
+template = '{: <18} {: <10.3f} {: <10.3f} {: <10.3f} {: <10.3f} {}'
 
 # print table header
 print(template.replace('.3f','').format('Method', 'RMSD', 'C-F dist.', 'C-H dist.', 'H-C-H angl.', 'duration'))
