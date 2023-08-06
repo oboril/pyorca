@@ -12,7 +12,7 @@ The ORCA output is in :download:`ethylene_geometry.out  <_static/ethylene_geomet
 
 .. exec_code::
 
-    # import PyOrca
+    # import PyORCA
     import pyorca as po
 
     # parse the ORCA output file

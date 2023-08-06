@@ -38,6 +38,8 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 exec_code_working_dir = "_static"
 exec_code_source_folders = ["../src"]
 
+html_show_sourcelink = False
+
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 

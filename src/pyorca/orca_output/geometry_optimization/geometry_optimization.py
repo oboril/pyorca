@@ -4,16 +4,17 @@ from typing import List
 
 from pyorca.orca_output.geometry_optimization.optimization_cycle import OptimizationCycle
 from pyorca.orca_output.orca_property.orca_property import OrcaProperty
+from pyorca.orca_output.single_point.single_point import SinglePointCalculation
 
 @dataclass(frozen=True, init=True)
-class GeometryOptimization:
+class GeometryOptimization(OrcaProperty):
     """Information about geometry optimization cycles and final evaluation."""
 
     cycles : List[OptimizationCycle]
     """Individual Optimization cycles"""
 
-    final_coordinates : List[List[float]]
-    """Final cartesian coordinates in Angstroem, `coordinates[atom_idx][axis]`"""
+    final_single_point: SinglePointEvaluation
+    """Final evaluation at the stationary point"""
 
     converged : bool
     """Whether the optimization reached stationary point"""
@@ -21,8 +22,8 @@ class GeometryOptimization:
     final_energy : float
     """Final energy in kJ/mol"""
 
-    orca_property : OrcaProperty | None
-    """Results from Orca Property Calculation, if present"""
+    final_coordinates : List[List[float]]
+    """Final cartesian coordinates in Angstroem, `coordinates[atom_idx][axis]`"""
 
     def __iter__(self):
         """Returns iterator that iterates though the Geometry Optimization Cycles"""
@@ -35,6 +36,8 @@ class GeometryOptimization:
 
         converged = _optimization_converged(text)
 
+        final_single_point = _parse_final_evaluation(text)
+
         final_energy = _find_final_energy(text)
 
         atoms, final_coordinates = _find_final_coordinates(text)
@@ -43,11 +46,12 @@ class GeometryOptimization:
         cycles = _parse_optimization_cycles(text)
 
         data = GeometryOptimization(
-            orca_property=orca_props,
+            **orca_props.__dict__,
             cycles=cycles,
             final_coordinates=final_coordinates,
             converged=converged,
             final_energy=final_energy,
+            final_single_point=final_single_point
         )
 
         return data
@@ -116,4 +120,18 @@ def _parse_optimization_cycles(text: str) -> List[OptimizationCycle]:
         cycles.append(cycle)
 
     return cycles
+
+def _parse_final_evaluation(text: str) -> SinglePointCalculation:
+    """Finds the Final Energy Evaluation at the Stationary Point and passes it to the parser"""
+
+    start = re.search(
+        r"\*\*\*\s*FINAL ENERGY EVALUATION AT THE STATIONARY POINT\s*\*\*\*",
+        text
+    )
+    if start is None:
+        return None
+    start = start.start()
+
+    return SinglePointCalculation.parse(text[start:])
+
 

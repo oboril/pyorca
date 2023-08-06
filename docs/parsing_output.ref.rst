@@ -1,5 +1,5 @@
-API reference
-=============
+OrcaOutput API reference
+========================
 
 OrcaOutput
 ----------

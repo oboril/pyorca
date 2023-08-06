@@ -12,7 +12,7 @@ The ORCA output is in the :download:`ethylene_uvvis.out <_static/ethylene_uvvis.
 
 .. exec_code::
 
-    # import PyOrca
+    # import PyORCA
     import pyorca as po
 
     # parse the ORCA output file

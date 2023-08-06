@@ -1,6 +1,6 @@
 from pyorca import OrcaOutput
 
-data = OrcaOutput.parse_file('data/neb.out')
+data = OrcaOutput.parse_file('data/ethylene_geometry.out')
 
 # print(f"{data.input_filename=}")
 # print(f"{data.input_text=}")
@@ -8,7 +8,7 @@ data = OrcaOutput.parse_file('data/neb.out')
 # print(f"{data.duration=}")
 
 
-print(f"{data.calculations[0].ts_optimization}")
+print(f"{data.calculations[0].final_single_point}")
 
 # print("GEOMETRY OPTIMIZATION CYCLES")
 
