@@ -145,6 +145,10 @@ leaving
                        Please study these warnings very carefully!
 ================================================================================
 
+WARNING: Old DensityContainer found on disk!
+         Will remove this file - 
+         If you want to keep old densities, please start your calculation with a different basename. 
+
 
 WARNING: Direct SCF is incompatible with Method<>HF and Method<>DFT
   ===> : conventional SCF is chosen
@@ -167,7 +171,7 @@ WARNING: Geometry Optimization
 ================================================================================
                                        INPUT FILE
 ================================================================================
-NAME = runtime/fluoromethane_PM3.inp
+NAME = runtime\fluoromethane_PM3.inp
 |  1> ! OPT PM3
 |  2> 
 |  3> * xyzfile 0 1 fluoromethane.xyz
@@ -357,7 +361,7 @@ Hamiltonian:
 
 
 General Settings:
- Integral files         IntName         .... runtime/fluoromethane_PM3
+ Integral files         IntName         .... runtime\fluoromethane_PM3
  Hartree-Fock type      HFTyp           .... RHF
  Total Charge           Charge          ....    0
  Multiplicity           Mult            ....    1
@@ -410,8 +414,8 @@ Smallest eigenvalue                        ... 1.982e-01
 Time for diagonalization                   ...    0.001 sec
 Threshold for overlap eigenvalues          ... 1.000e-08
 Number of eigenvalues below threshold      ... 0
-Time for construction of square roots      ...    0.003 sec
-Total time needed                          ...    0.004 sec
+Time for construction of square roots      ...    0.001 sec
+Total time needed                          ...    0.002 sec
 
 -------------------------------
 INITIAL GUESS: EXTENDED HUECKEL
@@ -484,11 +488,11 @@ SCF CONVERGENCE
   Last Orbital Gradient      ...    7.9542e-07  Tolerance :   1.0000e-05
   Last Orbital Rotation      ...    1.1975e-06  Tolerance :   1.0000e-05
 
-             **** THE GBW FILE WAS UPDATED (runtime/fluoromethane_PM3.gbw) ****
-             **** DENSITY runtime/fluoromethane_PM3.scfp WAS UPDATED ****
-             **** ENERGY FILE WAS UPDATED (runtime/fluoromethane_PM3.en.tmp) ****
-             **** THE GBW FILE WAS UPDATED (runtime/fluoromethane_PM3.gbw) ****
-             **** DENSITY runtime/fluoromethane_PM3.scfp WAS UPDATED ****
+             **** THE GBW FILE WAS UPDATED (runtime\fluoromethane_PM3.gbw) ****
+             **** DENSITY runtime\fluoromethane_PM3.scfp WAS UPDATED ****
+             **** ENERGY FILE WAS UPDATED (runtime\fluoromethane_PM3.en.tmp) ****
+             **** THE GBW FILE WAS UPDATED (runtime\fluoromethane_PM3.gbw) ****
+             **** DENSITY runtime\fluoromethane_PM3.scfp WAS UPDATED ****
 ----------------
 ORBITAL ENERGIES
 ----------------
@@ -594,18 +598,18 @@ TIMINGS
 
 Total SCF time: 0 days 0 hours 0 min 0 sec 
 
-Total time                  ....       0.428 sec
-Sum of individual times     ....       0.129 sec  ( 30.1%)
+Total time                  ....       0.376 sec
+Sum of individual times     ....       0.065 sec  ( 17.3%)
 
-Fock matrix formation       ....       0.044 sec  ( 10.3%)
-Diagonalization             ....       0.000 sec  (  0.0%)
+Fock matrix formation       ....       0.049 sec  ( 13.0%)
+Diagonalization             ....       0.002 sec  (  0.5%)
 Density matrix formation    ....       0.000 sec  (  0.0%)
-Population analysis         ....       0.032 sec  (  7.5%)
-Initial guess               ....       0.000 sec  (  0.0%)
+Population analysis         ....       0.004 sec  (  1.1%)
+Initial guess               ....       0.001 sec  (  0.3%)
 Orbital Transformation      ....       0.000 sec  (  0.0%)
 Orbital Orthonormalization  ....       0.000 sec  (  0.0%)
-DIIS solution               ....       0.044 sec  ( 10.3%)
-SOSCF solution              ....       0.009 sec  (  2.1%)
+DIIS solution               ....       0.007 sec  (  1.9%)
+SOSCF solution              ....       0.002 sec  (  0.5%)
 
 Maximum memory used throughout the entire SCF-calculation: 222.8 MB
 
@@ -837,11 +841,11 @@ ITER      Energy       Delta-E        Grad      Rot      Max-DP    RMS-DP
 Total Energy       :          -22.24468533 Eh            -605.30866 eV
   Last Energy change         ...   -1.9816e-10  Tolerance :   1.0000e-08
   Last MAX-Density change    ...    5.0000e-06  Tolerance :   1.0000e-07
-             **** THE GBW FILE WAS UPDATED (runtime/fluoromethane_PM3.gbw) ****
-             **** DENSITY runtime/fluoromethane_PM3.scfp WAS UPDATED ****
-             **** ENERGY FILE WAS UPDATED (runtime/fluoromethane_PM3.en.tmp) ****
-             **** THE GBW FILE WAS UPDATED (runtime/fluoromethane_PM3.gbw) ****
-             **** DENSITY runtime/fluoromethane_PM3.scfp WAS UPDATED ****
+             **** THE GBW FILE WAS UPDATED (runtime\fluoromethane_PM3.gbw) ****
+             **** DENSITY runtime\fluoromethane_PM3.scfp WAS UPDATED ****
+             **** ENERGY FILE WAS UPDATED (runtime\fluoromethane_PM3.en.tmp) ****
+             **** THE GBW FILE WAS UPDATED (runtime\fluoromethane_PM3.gbw) ****
+             **** DENSITY runtime\fluoromethane_PM3.scfp WAS UPDATED ****
 Total SCF time: 0 days 0 hours 0 min 0 sec 
 
 Maximum memory used throughout the entire SCF-calculation: 222.8 MB
@@ -1074,7 +1078,7 @@ Hamiltonian:
 
 
 General Settings:
- Integral files         IntName         .... runtime/fluoromethane_PM3
+ Integral files         IntName         .... runtime\fluoromethane_PM3
  Hartree-Fock type      HFTyp           .... RHF
  Total Charge           Charge          ....    0
  Multiplicity           Mult            ....    1
@@ -1133,7 +1137,7 @@ Total time needed                          ...    0.002 sec
 ---------------------
 INITIAL GUESS: MOREAD
 ---------------------
-Guess MOs are being read from file: runtime/fluoromethane_PM3.gbw
+Guess MOs are being read from file: runtime\fluoromethane_PM3.gbw
 Input Geometry matches current geometry (good)
 Input basis set matches current basis set (good)
                       ------------------
@@ -1190,11 +1194,11 @@ SCF CONVERGENCE
   Last Orbital Gradient      ...    4.3855e-06  Tolerance :   1.0000e-05
   Last Orbital Rotation      ...    7.3283e-06  Tolerance :   1.0000e-05
 
-             **** THE GBW FILE WAS UPDATED (runtime/fluoromethane_PM3.gbw) ****
-             **** DENSITY runtime/fluoromethane_PM3.scfp WAS UPDATED ****
-             **** ENERGY FILE WAS UPDATED (runtime/fluoromethane_PM3.en.tmp) ****
-             **** THE GBW FILE WAS UPDATED (runtime/fluoromethane_PM3.gbw) ****
-             **** DENSITY runtime/fluoromethane_PM3.scfp WAS UPDATED ****
+             **** THE GBW FILE WAS UPDATED (runtime\fluoromethane_PM3.gbw) ****
+             **** DENSITY runtime\fluoromethane_PM3.scfp WAS UPDATED ****
+             **** ENERGY FILE WAS UPDATED (runtime\fluoromethane_PM3.en.tmp) ****
+             **** THE GBW FILE WAS UPDATED (runtime\fluoromethane_PM3.gbw) ****
+             **** DENSITY runtime\fluoromethane_PM3.scfp WAS UPDATED ****
 ----------------
 ORBITAL ENERGIES
 ----------------
@@ -1300,18 +1304,18 @@ TIMINGS
 
 Total SCF time: 0 days 0 hours 0 min 0 sec 
 
-Total time                  ....       0.310 sec
-Sum of individual times     ....       0.041 sec  ( 13.2%)
+Total time                  ....       0.331 sec
+Sum of individual times     ....       0.024 sec  (  7.3%)
 
-Fock matrix formation       ....       0.014 sec  (  4.5%)
+Fock matrix formation       ....       0.015 sec  (  4.5%)
 Diagonalization             ....       0.000 sec  (  0.0%)
 Density matrix formation    ....       0.000 sec  (  0.0%)
-Population analysis         ....       0.017 sec  (  5.5%)
+Population analysis         ....       0.007 sec  (  2.1%)
 Initial guess               ....       0.001 sec  (  0.3%)
 Orbital Transformation      ....       0.000 sec  (  0.0%)
 Orbital Orthonormalization  ....       0.000 sec  (  0.0%)
 DIIS solution               ....       0.000 sec  (  0.0%)
-SOSCF solution              ....       0.009 sec  (  2.9%)
+SOSCF solution              ....       0.001 sec  (  0.3%)
 
 Maximum memory used throughout the entire SCF-calculation: 222.8 MB
 
@@ -1338,8 +1342,8 @@ FINAL SINGLE POINT ENERGY       -22.244686040692
 Dipole Moment Calculation                       ... on
 Quadrupole Moment Calculation                   ... off
 Polarizability Calculation                      ... off
-GBWName                                         ... runtime/fluoromethane_PM3.gbw
-Electron density                                ... runtime/fluoromethane_PM3.scfp
+GBWName                                         ... runtime\fluoromethane_PM3.gbw
+Electron density                                ... runtime\fluoromethane_PM3.scfp
 The origin for moment calculation is the CENTER OF MASS  = ( 0.000000, -0.000031  0.192175)
 
 -------------
@@ -1371,10 +1375,10 @@ x,y,z [Debye]:    15.966071     0.000000    -0.000012
 
 Timings for individual modules:
 
-Sum of individual times         ...        2.845 sec (=   0.047 min)
-STO integral calculation        ...        1.468 sec (=   0.024 min)  51.6 %
-SCF iterations                  ...        1.215 sec (=   0.020 min)  42.7 %
-SCF Gradient evaluation         ...        0.059 sec (=   0.001 min)   2.1 %
-Geometry relaxation             ...        0.103 sec (=   0.002 min)   3.6 %
+Sum of individual times         ...        1.435 sec (=   0.024 min)
+STO integral calculation        ...        0.110 sec (=   0.002 min)   7.7 %
+SCF iterations                  ...        1.154 sec (=   0.019 min)  80.4 %
+SCF Gradient evaluation         ...        0.071 sec (=   0.001 min)   4.9 %
+Geometry relaxation             ...        0.100 sec (=   0.002 min)   7.0 %
                              ****ORCA TERMINATED NORMALLY****
-TOTAL RUN TIME: 0 days 0 hours 0 minutes 3 seconds 159 msec
+TOTAL RUN TIME: 0 days 0 hours 0 minutes 1 seconds 744 msec
