@@ -23,3 +23,5 @@ Aligning structures
 .. autofunction:: pyorca.geometry.read_xyz
     
 .. autofunction:: pyorca.geometry.write_xyz
+
+.. autofunction:: pyorca.geometry.generate_xyz_block

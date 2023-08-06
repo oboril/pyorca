@@ -39,7 +39,15 @@ def write_xyz(atoms: List[str], coords: List[List[float]], comment : str = "") -
     text += str(len(atoms)) + "\n"
     text += comment + "\n"
 
+    text += generate_xyz_block(atoms, coords)
+    text += "\n" # some programs struggle to parse files without empty line at the end
+    
+    return text
+
+def generate_xyz_block(atoms: List[str], coords: List[List[float]]) -> str:
+    """Generates xyz block from given atoms and coords. This can be used to generate ORCA input files."""
+    text = ""
     for atom, coords in zip(atoms, coords):
         text += f"   {atom: <3} {coords[0]: >15.7f} {coords[1]: >15.7f} {coords[2]: >15.7f}\n"
-    
+    text = text[:-1]
     return text
