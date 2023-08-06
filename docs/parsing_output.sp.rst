@@ -33,4 +33,5 @@ The ORCA output is in the :download:`ethylene_uvvis.out <_static/ethylene_uvvis.
     for wavelength, intensity in zip(electronic_spectrum.wavelengths, electronic_spectrum.intensities):
         print(f'{wavelength:0.1f} nm (relative intensity {intensity:0.4f})')
 
-The experimental UV-VIS spectrum of ethylene has absorption maximum around 261 nm, so even simple B3LYP/def2-TZVP can give us a good estimate!
+The experimental UV-VIS spectrum of ethylene has absorption maximum around 261 nm,
+so it seems that simple B3LYP/def2-TZVP doesn't give us very good estimate.
