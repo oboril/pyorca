@@ -3,3 +3,5 @@
 _old*
 docs/_build/*
 docs/_build
+tests
+automatic_nmr*
