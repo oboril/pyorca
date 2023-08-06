@@ -41,7 +41,7 @@ class Nmr:
         """
 
         for i in range(len(self.shifts)):
-            if self.shifts[i].atom in standards:
+            if self.shifts[i].atom in standards.keys():
                 self.shifts[i].shift = standards[self.shifts[i].atom] - self.shifts[i].shift
 
 @dataclass(init=True)
@@ -93,8 +93,8 @@ def _parse_shifts(text: str) -> List[float] | None:
 
     shifts = [
         NmrShift(
-            atom=int(m[0]),
-            atom_idx=m[1],
+            atom=m[1],
+            atom_idx=int(m[0]),
             shift=float(m[2])
         ) for m in shifts
     ]
