@@ -1,6 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import List
+from typing import List, Tuple
 
 from pyorca.orca_output.geometry_optimization.optimization_cycle import OptimizationCycle
 from pyorca.orca_output.orca_property.orca_property import OrcaProperty
