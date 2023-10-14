@@ -95,7 +95,7 @@ def _parse_mayer_bond_order(text: str) -> List[BondOrder]:
     extract = extract.group(1)
 
     bonds = re.findall(
-        r"B\(\s*(\d)+\-\w+\s*\,\s*(\d+)\-\w+\s*\)\s*\:\s+(\-?\d+\.\d+)",
+        r"B\(\s*(\d+)\-\w+\s*\,\s*(\d+)\-\w+\s*\)\s*\:\s+(\-?\d+\.\d+)",
         extract
     )
 
