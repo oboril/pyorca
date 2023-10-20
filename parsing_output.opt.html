@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geometry Optimization &mdash; PyOrca 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="PyORCA.orca_output reference" href="parsing_output.ref.html" />
+    <link rel="prev" title="Single Point Calculation" href="parsing_output.sp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PyOrca
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to PyORCA!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parsing Output</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.html">Parsing ORCA output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.sp.html">Single Point Calculation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Geometry Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.ref.html">PyORCA.orca_output reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">3D structures</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="geometry.example.html">Comparing Geometry Accuracy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.ref.html">PyORCA.geometry reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conformers.ref.html">PyORCA.conformers reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Automated Workflows</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="automatic_nmr.html">NMR shifts of solvents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orca_interface.ref.html">PyORCA.orca_interface reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyOrca</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Geometry Optimization</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="geometry-optimization">
+<h1>Geometry Optimization<a class="headerlink" href="#geometry-optimization" title="Link to this heading"></a></h1>
+<p>Geometry optimizations are one of the most common calculations in quantum chemistry.
+Let’s take a look on the geometry optimization of ethylene once again!</p>
+<p>The ORCA output is in <a class="reference download internal" download="" href="_downloads/8fd5da73c32f8feb8a66e2d482baff6c/ethylene_geometry.out"><code class="xref download docutils literal notranslate"><span class="pre">ethylene_geometry.out</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import PyORCA</span>
+<span class="kn">import</span> <span class="nn">pyorca</span> <span class="k">as</span> <span class="nn">po</span>
+
+<span class="c1"># parse the ORCA output file</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">po</span><span class="o">.</span><span class="n">OrcaOutput</span><span class="o">.</span><span class="n">parse_file</span><span class="p">(</span><span class="s1">&#39;ethylene_geometry.out&#39;</span><span class="p">)</span>
+
+<span class="c1"># let&#39;s remind ourselves, what was the ORCA input</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The ORCA input was:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">input_text</span><span class="p">)</span>
+
+<span class="c1"># geometry optimization is the only calculation in this output file</span>
+<span class="n">geometry_optimization</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">calculations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># did the geometry optimization converge?</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Did geometry optimization converge:&#39;</span><span class="p">,</span> <span class="n">geometry_optimization</span><span class="o">.</span><span class="n">converged</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># how many geometry optimization cycles did it take?</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of optimization cycles:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geometry_optimization</span><span class="o">.</span><span class="n">cycles</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># print the energies of the individual optimization cycles</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">cycle</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">geometry_optimization</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Cycle </span><span class="si">{</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">cycle</span><span class="o">.</span><span class="n">energy</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1"> kJ/mol&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># it is common to check the frequencies of normal modes</span>
+<span class="c1"># any imaginary frequencies would signall that the structure is not at energetic minimum</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of imaginary modes:&#39;</span><span class="p">,</span> <span class="n">geometry_optimization</span><span class="o">.</span><span class="n">final_single_point</span><span class="o">.</span><span class="n">normal_modes</span><span class="o">.</span><span class="n">imaginary</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># let&#39;s also take a look what is the C-C bond order</span>
+<span class="n">bond_orders</span> <span class="o">=</span> <span class="n">geometry_optimization</span><span class="o">.</span><span class="n">final_single_point</span><span class="o">.</span><span class="n">population_analysis</span><span class="o">.</span><span class="n">bond_orders</span>
+<span class="c1"># filter the bond orders based on atom indeces</span>
+<span class="n">CC_bond_order</span> <span class="o">=</span> <span class="p">[</span><span class="n">bo</span> <span class="k">for</span> <span class="n">bo</span> <span class="ow">in</span> <span class="n">bond_orders</span> <span class="k">if</span> <span class="n">bo</span><span class="o">.</span><span class="n">atom1</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">bo</span><span class="o">.</span><span class="n">atom2</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The C-C Mayer bond order is </span><span class="si">{</span><span class="n">CC_bond_order</span><span class="o">.</span><span class="n">order</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>The ORCA input was:
+! B3LYP def2-TZVP def2/J OPT TightOpt FREQ
+
+* xyz 0 1
+   C       -8.44174        0.21370        0.00000
+   C       -7.17489        0.62142        0.00000
+   H       -8.71487       -0.72541        0.47062
+   H       -9.21135        0.81722       -0.47062
+   H       -6.40529        0.01790        0.47062
+   H       -6.90176        1.56053       -0.47062
+*
+
+Did geometry optimization converge: True
+
+Number of optimization cycles: 4
+
+Cycle 1: -206273.12 kJ/mol
+Cycle 2: -206273.78 kJ/mol
+Cycle 3: -206274.26 kJ/mol
+Cycle 4: -206274.27 kJ/mol
+
+Number of imaginary modes: 0
+
+The C-C Mayer bond order is 1.96
+</pre></div>
+</div>
+<p>We can see that the optimization converged after 4 cycles, and that it is indeed a local minimum - there aren’t any imaginary modes.</p>
+<p>It is possible to read many different properties from both
+<a class="reference internal" href="parsing_output.ref.html#pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle" title="pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptimizationCycle</span></code></a>
+and <a class="reference internal" href="parsing_output.ref.html#pyorca.orca_output.single_point.single_point.SinglePointCalculation" title="pyorca.orca_output.single_point.single_point.SinglePointCalculation"><code class="xref py py-class docutils literal notranslate"><span class="pre">SinglePointCalculation</span></code></a>.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="parsing_output.sp.html" class="btn btn-neutral float-left" title="Single Point Calculation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="parsing_output.ref.html" class="btn btn-neutral float-right" title="PyORCA.orca_output reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jan Oboril.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

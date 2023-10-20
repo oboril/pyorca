@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NMR shifts of solvents &mdash; PyOrca 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="PyORCA.orca_interface reference" href="orca_interface.ref.html" />
+    <link rel="prev" title="PyORCA.conformers reference" href="conformers.ref.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PyOrca
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to PyORCA!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parsing Output</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.html">Parsing ORCA output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.sp.html">Single Point Calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.opt.html">Geometry Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.ref.html">PyORCA.orca_output reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">3D structures</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="geometry.example.html">Comparing Geometry Accuracy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.ref.html">PyORCA.geometry reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conformers.ref.html">PyORCA.conformers reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Automated Workflows</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">NMR shifts of solvents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#orca-input">ORCA input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-python-script">The Python script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="orca_interface.ref.html">PyORCA.orca_interface reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyOrca</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">NMR shifts of solvents</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nmr-shifts-of-solvents">
+<h1>NMR shifts of solvents<a class="headerlink" href="#nmr-shifts-of-solvents" title="Link to this heading"></a></h1>
+<p>In this example, we will create an automatic pipeline for predicting 1H NMR shifts of common solvents.
+Although this is a simplistic example, it nicely demonstrates how PyORCA could be used to
+create automated workflows for ORCA calculations.</p>
+<dl class="simple">
+<dt>The individual steps are:</dt><dd><ol class="arabic simple">
+<li><p>Use PyORCA to guess initial geometry from SMILES</p></li>
+<li><p>Create ORCA input file</p></li>
+<li><p>Run the ORCA calculation</p></li>
+<li><p>Use PyORCA to parse the output file and extract NMR shielding constants</p></li>
+<li><p>Calibrate the shifts with reference to TMS</p></li>
+<li><p>Print the results and compare them with experimental data</p></li>
+</ol>
+</dd>
+</dl>
+<section id="orca-input">
+<h2>ORCA input<a class="headerlink" href="#orca-input" title="Link to this heading"></a></h2>
+<p>We will be using the following compound job for ORCA:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Method for refining geometry and getting 1H NMR shielding constants
+# Implicit solvation with chloroform is used
+
+# Geometry refinement
+NEW_STEP
+! B3LYP def2-TZVP def2/J D4 Opt TightOpt TightSCF Freq
+! CPCM(chloroform)
+STEP_END
+
+# NMR calculation
+NEW_STEP
+! B3LYP def2-TZVP NORI D4 NMR VeryTightSCF NoFrozenCore
+! CPCM(chloroform)
+%EPRNMR
+     NUCLEI = ALL H {SHIFT}
+END
+STEP_END
+
+END
+</pre></div>
+</div>
+<p>The ORCA input files can reference this method, and their general structure will be:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>%maxcore 8000
+
+* xyz 0 1
+[INITIAL GEOMETRY OF THE MOLECULE]
+*
+
+%compound &quot;method.cmp&quot;
+</pre></div>
+</div>
+<p>So let’s take a look on the Python script!</p>
+</section>
+<section id="the-python-script">
+<h2>The Python script<a class="headerlink" href="#the-python-script" title="Link to this heading"></a></h2>
+<p>First, let’s import relevant parts from PyORCA and define some paths.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyorca.conformers</span> <span class="kn">import</span> <span class="n">conformer_from_smiles</span>
+<span class="kn">from</span> <span class="nn">pyorca.geometry</span> <span class="kn">import</span> <span class="n">generate_xyz_block</span>
+<span class="kn">from</span> <span class="nn">pyorca</span> <span class="kn">import</span> <span class="n">run_orca</span><span class="p">,</span> <span class="n">OrcaOutput</span>
+
+<span class="n">working_dir</span> <span class="o">=</span> <span class="s2">&quot;orca/&quot;</span>
+<span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;method.cmp&quot;</span>
+</pre></div>
+</div>
+<p>We also need to define the SMILES strings and create template for the ORCA input.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># names and SMILES of target molecules</span>
+<span class="n">molecules</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;tetramethylsilane&#39;</span><span class="p">:</span> <span class="s1">&#39;C[Si](C)(C)C&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;chloroform&#39;</span><span class="p">:</span> <span class="s1">&#39;ClC(Cl)Cl&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;acetonitrile&#39;</span><span class="p">:</span> <span class="s1">&#39;CC#N&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;acetone&#39;</span><span class="p">:</span> <span class="s1">&#39;CC(=O)C&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;benzene&#39;</span><span class="p">:</span> <span class="s1">&#39;c1ccccc1&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># template for the ORCA input file</span>
+<span class="c1"># %VAR_NAME% will be replaced by actual values later</span>
+<span class="n">input_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">%maxcore 8000</span>
+
+<span class="s2">* xyz 0 1</span>
+<span class="si">%X</span><span class="s2">YZ_BLOCK%</span>
+<span class="s2">*</span>
+
+<span class="si">%c</span><span class="s2">ompound &quot;%METHOD%&quot;</span>
+
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;%METHOD%&quot;</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we run the individual ORCA calculations and extract the NMR data from the output files.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nmr_data</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># NMR data will be stored here</span>
+
+<span class="c1"># run the ORCA calculation for all molecules</span>
+<span class="k">for</span> <span class="n">molecule</span><span class="p">,</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="n">molecules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Starting ORCA calculation for:&#39;</span><span class="p">,</span> <span class="n">molecule</span><span class="p">)</span>
+
+    <span class="c1"># generate initial conformer</span>
+    <span class="c1"># MMFF94 is defined well for all molecules in the dataset - should be better than UFF</span>
+    <span class="n">conformer</span> <span class="o">=</span> <span class="n">conformer_from_smiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">force_field</span><span class="o">=</span><span class="s1">&#39;MMFF94&#39;</span><span class="p">)</span>
+
+    <span class="c1"># create ORCA input file</span>
+    <span class="n">input_text</span> <span class="o">=</span> <span class="n">input_template</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+        <span class="s2">&quot;</span><span class="si">%X</span><span class="s2">YZ_BLOCK%&quot;</span><span class="p">,</span>
+        <span class="n">generate_xyz_block</span><span class="p">(</span><span class="n">conformer</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span> <span class="n">conformer</span><span class="o">.</span><span class="n">coordinates</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir</span><span class="p">,</span> <span class="n">molecule</span><span class="o">+</span><span class="s1">&#39;.inp&#39;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">input_text</span><span class="p">)</span>
+
+    <span class="c1"># run ORCA</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">run_orca</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="c1"># check exit status</span>
+    <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ORCA terminated with status code&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">status_message</span><span class="p">)</span>
+
+    <span class="c1"># parse the output file</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">OrcaOutput</span><span class="o">.</span><span class="n">parse_file</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span>
+
+    <span class="c1"># check imaginary frequencies from the second calculation</span>
+    <span class="n">n_imaginary_modes</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">calculations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">final_single_point</span><span class="o">.</span><span class="n">normal_modes</span><span class="o">.</span><span class="n">imaginary</span>
+    <span class="k">if</span> <span class="n">n_imaginary_modes</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The current structure has </span><span class="si">{</span><span class="n">n_imaginary_modes</span><span class="si">}</span><span class="s2"> imaginary nodes!!!&quot;</span><span class="p">)</span>
+
+    <span class="c1"># get the NMR shifts</span>
+    <span class="n">nmr_data</span><span class="p">[</span><span class="n">molecule</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">calculations</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">nmr</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All ORCA calculations finished!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The last step is to calibrate shifts against TMS, and average shifts of equivalent hydrogens.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Since all molecules in this dataset contain only equivalent hydrogens, we can average their shifts</span>
+<span class="k">def</span> <span class="nf">average_shifts</span><span class="p">(</span><span class="n">shifts</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">s</span><span class="o">.</span><span class="n">shift</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">shifts</span><span class="p">])</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">shifts</span><span class="p">)</span>
+
+<span class="c1"># calibrate shifts according to TMS</span>
+<span class="n">tms_shift</span> <span class="o">=</span> <span class="n">average_shifts</span><span class="p">(</span><span class="n">nmr_data</span><span class="p">[</span><span class="s1">&#39;tetramethylsilane&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shifts</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">molecule</span> <span class="ow">in</span> <span class="n">nmr_data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">nmr_data</span><span class="p">[</span><span class="n">molecule</span><span class="p">]</span><span class="o">.</span><span class="n">calibrate_shifts</span><span class="p">({</span><span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="n">tms_shift</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>The calculated shifts can be now neatly summarized and compared to experimental ones.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># for comparison, these are experimental shifts in CDCl3</span>
+<span class="n">experimental_shifts</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;tetramethylsilane&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="s1">&#39;chloroform&#39;</span><span class="p">:</span> <span class="mf">7.26</span><span class="p">,</span>
+    <span class="s1">&#39;acetonitrile&#39;</span><span class="p">:</span> <span class="mf">2.10</span><span class="p">,</span>
+    <span class="s1">&#39;acetone&#39;</span><span class="p">:</span> <span class="mf">2.17</span><span class="p">,</span>
+    <span class="s1">&#39;benzene&#39;</span><span class="p">:</span> <span class="mf">7.36</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># print summary table</span>
+<span class="n">template</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{: &lt;20}</span><span class="s1"> </span><span class="si">{: &gt;12.2f}</span><span class="s1"> </span><span class="si">{: &gt;12.2f}</span><span class="s1">&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.2f&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Molecule&#39;</span><span class="p">,</span> <span class="s1">&#39;Calc. shift&#39;</span><span class="p">,</span> <span class="s1">&#39;Exp. shift&#39;</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">molecule</span> <span class="ow">in</span> <span class="n">nmr_data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">molecule</span><span class="p">,</span>
+        <span class="n">average_shifts</span><span class="p">(</span><span class="n">nmr_data</span><span class="p">[</span><span class="n">molecule</span><span class="p">]</span><span class="o">.</span><span class="n">shifts</span><span class="p">),</span>
+        <span class="n">experimental_shifts</span><span class="p">[</span><span class="n">molecule</span><span class="p">]</span>
+    <span class="p">))</span>
+</pre></div>
+</div>
+<p>All the calculations take around an hour to run, and the script output is below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Starting ORCA calculation for: tetramethylsilane
+Starting ORCA calculation for: chloroform
+Starting ORCA calculation for: acetonitrile
+Starting ORCA calculation for: acetone
+Starting ORCA calculation for: benzene
+All ORCA calculations finished!
+
+Molecule              Calc. shift   Exp. shift
+tetramethylsilane           -0.00         0.00
+chloroform                   7.82         7.26
+acetonitrile                 1.98         2.10
+acetone                      2.21         2.17
+benzene                      7.80         7.36
+</pre></div>
+</div>
+<p>The accuracy of the calculated shifts reflect the accuracy of B3LYP/def2-TZVP, but overall they are not bad!</p>
+<p>The great thing about this script is that we could calculate the shifts for tens or even hundreds of molecules, and fully automatically!</p>
+</section>
+<section id="directory-structure">
+<h2>Directory Structure<a class="headerlink" href="#directory-structure" title="Link to this heading"></a></h2>
+<p>Let’s also shortly talk about the directory structure.
+I prefer to have separate folders for python scripts and tempates,
+for ORCA input and output files, and for all other ORCA files.</p>
+<p>I set up the directories like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>┳━ orca
+┣━ process.py
+┗━ method.cmp
+</pre></div>
+</div>
+<p>The ORCA input files are saved into the <code class="docutils literal notranslate"><span class="pre">orca</span></code> folder, and the function <cite>run_orca &lt;pyorca.run_orca&gt;</cite>
+then creates <code class="docutils literal notranslate"><span class="pre">runtime</span></code> subfolder, where all the other ORCA files will be saved.</p>
+<p>After running <code class="docutils literal notranslate"><span class="pre">process.py</span></code>, the directory structure looks like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>┳━ orca
+┃  ┣━ runtime
+┃  ┃   ┗━ many ORCA files, such as .xyz, .gbw, .hess, .opt, ...
+┃  ┣━ acetone.inp
+┃  ┣━ acetone.out
+┃  ┣━ acetonitrile.inp
+┃  ┣━ acetonitrile.out
+┃  ┣━ benzene.inp
+┃  ┣━ benzene.out
+┃  ┗━ ...
+┣━ process.py
+┗━ method.cmp
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="conformers.ref.html" class="btn btn-neutral float-left" title="PyORCA.conformers reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="orca_interface.ref.html" class="btn btn-neutral float-right" title="PyORCA.orca_interface reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jan Oboril.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

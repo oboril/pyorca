@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PyORCA.geometry reference &mdash; PyOrca 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="PyORCA.conformers reference" href="conformers.ref.html" />
+    <link rel="prev" title="Comparing Geometry Accuracy" href="geometry.example.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PyOrca
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to PyORCA!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parsing Output</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.html">Parsing ORCA output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.sp.html">Single Point Calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.opt.html">Geometry Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.ref.html">PyORCA.orca_output reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">3D structures</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="geometry.example.html">Comparing Geometry Accuracy</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PyORCA.geometry reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#simple-geometric-functions">Simple geometric functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#aligning-structures">Aligning structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#xyz-files">.xyz files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="conformers.ref.html">PyORCA.conformers reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Automated Workflows</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="automatic_nmr.html">NMR shifts of solvents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orca_interface.ref.html">PyORCA.orca_interface reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyOrca</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">PyORCA.geometry reference</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyorca-geometry-reference">
+<h1>PyORCA.geometry reference<a class="headerlink" href="#pyorca-geometry-reference" title="Link to this heading"></a></h1>
+<section id="simple-geometric-functions">
+<h2>Simple geometric functions<a class="headerlink" href="#simple-geometric-functions" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyorca.geometry.distance">
+<span class="sig-prename descclassname"><span class="pre">pyorca.geometry.</span></span><span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#pyorca.geometry.distance" title="Link to this definition"></a></dt>
+<dd><p>Returns euclidean distance between the two points</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyorca.geometry.angle_degree">
+<span class="sig-prename descclassname"><span class="pre">pyorca.geometry.</span></span><span class="sig-name descname"><span class="pre">angle_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#pyorca.geometry.angle_degree" title="Link to this definition"></a></dt>
+<dd><p>Returns the angle in degrees defined by the three points</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyorca.geometry.dihedral_degree">
+<span class="sig-prename descclassname"><span class="pre">pyorca.geometry.</span></span><span class="sig-name descname"><span class="pre">dihedral_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords4</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#pyorca.geometry.dihedral_degree" title="Link to this definition"></a></dt>
+<dd><p>Returns the dihedral angle in degrees defined by the four points</p>
+</dd></dl>
+
+</section>
+<section id="aligning-structures">
+<h2>Aligning structures<a class="headerlink" href="#aligning-structures" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyorca.geometry.aligned_rmsd">
+<span class="sig-prename descclassname"><span class="pre">pyorca.geometry.</span></span><span class="sig-name descname"><span class="pre">aligned_rmsd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">array</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#pyorca.geometry.aligned_rmsd" title="Link to this definition"></a></dt>
+<dd><p>Aligns the structures and returns the RMSD. Assumes the ordering of atoms is identical in both.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyorca.geometry.align_xyz_files">
+<span class="sig-prename descclassname"><span class="pre">pyorca.geometry.</span></span><span class="sig-name descname"><span class="pre">align_xyz_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#pyorca.geometry.align_xyz_files" title="Link to this definition"></a></dt>
+<dd><p>Aligns molecules from .xyz files and returns the RMSD</p>
+</dd></dl>
+
+</section>
+<section id="xyz-files">
+<h2>.xyz files<a class="headerlink" href="#xyz-files" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyorca.geometry.read_xyz">
+<span class="sig-prename descclassname"><span class="pre">pyorca.geometry.</span></span><span class="sig-name descname"><span class="pre">read_xyz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">array</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyorca.geometry.read_xyz" title="Link to this definition"></a></dt>
+<dd><p>Reads .xyz text and returns atoms, coordinates and comment line</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyorca.geometry.write_xyz">
+<span class="sig-prename descclassname"><span class="pre">pyorca.geometry.</span></span><span class="sig-name descname"><span class="pre">write_xyz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pyorca.geometry.write_xyz" title="Link to this definition"></a></dt>
+<dd><p>Generates .xyz text from given atoms and coords</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyorca.geometry.generate_xyz_block">
+<span class="sig-prename descclassname"><span class="pre">pyorca.geometry.</span></span><span class="sig-name descname"><span class="pre">generate_xyz_block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pyorca.geometry.generate_xyz_block" title="Link to this definition"></a></dt>
+<dd><p>Generates xyz block from given atoms and coords. This can be used to generate ORCA input files.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="geometry.example.html" class="btn btn-neutral float-left" title="Comparing Geometry Accuracy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="conformers.ref.html" class="btn btn-neutral float-right" title="PyORCA.conformers reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jan Oboril.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

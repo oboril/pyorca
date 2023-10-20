@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PyORCA.orca_output reference &mdash; PyOrca 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Comparing Geometry Accuracy" href="geometry.example.html" />
+    <link rel="prev" title="Geometry Optimization" href="parsing_output.opt.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PyOrca
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to PyORCA!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parsing Output</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.html">Parsing ORCA output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.sp.html">Single Point Calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.opt.html">Geometry Optimization</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PyORCA.orca_output reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#electronicspectrum">ElectronicSpectrum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#geometryoptimization">GeometryOptimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nebsettings">NebSettings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nmr">Nmr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nmrshift">NmrShift</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#normalmodes">NormalModes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nudgedelasticbands">NudgedElasticBands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optimizationcycle">OptimizationCycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#orcaoutput">OrcaOutput</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#orcaproperty">OrcaProperty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#populationanalysis">PopulationAnalysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#relaxedscan">RelaxedScan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#singlepointcalculation">SinglePointCalculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#thermochemistry">Thermochemistry</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">3D structures</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="geometry.example.html">Comparing Geometry Accuracy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.ref.html">PyORCA.geometry reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conformers.ref.html">PyORCA.conformers reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Automated Workflows</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="automatic_nmr.html">NMR shifts of solvents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orca_interface.ref.html">PyORCA.orca_interface reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyOrca</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">PyORCA.orca_output reference</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyorca-orca-output-reference">
+<h1>PyORCA.orca_output reference<a class="headerlink" href="#pyorca-orca-output-reference" title="Link to this heading"></a></h1>
+<section id="electronicspectrum">
+<h2>ElectronicSpectrum<a class="headerlink" href="#electronicspectrum" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyorca.orca_output.single_point.electronic_spectrum.</span></span><span class="sig-name descname"><span class="pre">ElectronicSpectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelengths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum" title="Link to this definition"></a></dt>
+<dd><p>Calculated energies and intensities for electronic transitions</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum.energies">
+<span class="sig-name descname"><span class="pre">energies</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum.energies" title="Link to this definition"></a></dt>
+<dd><p>Excited state energies in cm^-1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum.intensities">
+<span class="sig-name descname"><span class="pre">intensities</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum.intensities" title="Link to this definition"></a></dt>
+<dd><p>The <cite>fosc</cite> values for transitions from ground states</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum" title="pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum"><span class="pre">ElectronicSpectrum</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum.parse" title="Link to this definition"></a></dt>
+<dd><p>Finds and parses electronic transition data</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum.wavelengths">
+<span class="sig-name descname"><span class="pre">wavelengths</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum.wavelengths" title="Link to this definition"></a></dt>
+<dd><p>Transition wavelengths from ground state in nm</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="geometryoptimization">
+<h2>GeometryOptimization<a class="headerlink" href="#geometryoptimization" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyorca.orca_output.geometry_optimization.geometry_optimization.</span></span><span class="sig-name descname"><span class="pre">GeometryOptimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_coordinates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dipole_moment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotational_constants</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normal_modes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.orca_property.normal_modes.NormalModes" title="pyorca.orca_output.orca_property.normal_modes.NormalModes"><span class="pre">NormalModes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thermochemistry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry" title="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry"><span class="pre">Thermochemistry</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.orca_property.nmr.Nmr" title="pyorca.orca_output.orca_property.nmr.Nmr"><span class="pre">Nmr</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cycles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle" title="pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle"><span class="pre">OptimizationCycle</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_single_point</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation" title="pyorca.orca_output.single_point.single_point.SinglePointCalculation"><span class="pre">SinglePointCalculation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">converged</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_energy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_coordinates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization" title="Link to this definition"></a></dt>
+<dd><p>Information about geometry optimization cycles and final evaluation.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.atoms">
+<span class="sig-name descname"><span class="pre">atoms</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.atoms" title="Link to this definition"></a></dt>
+<dd><p>Atom symbols like <cite>H</cite> or <cite>C</cite>, the order is identical for entire calculation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.converged">
+<span class="sig-name descname"><span class="pre">converged</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.converged" title="Link to this definition"></a></dt>
+<dd><p>Whether the optimization reached stationary point</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.cycles">
+<span class="sig-name descname"><span class="pre">cycles</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle" title="pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle"><span class="pre">OptimizationCycle</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.cycles" title="Link to this definition"></a></dt>
+<dd><p>Individual Optimization cycles</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.dipole_moment">
+<span class="sig-name descname"><span class="pre">dipole_moment</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.dipole_moment" title="Link to this definition"></a></dt>
+<dd><p>Dipole moment in Debye</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.final_coordinates">
+<span class="sig-name descname"><span class="pre">final_coordinates</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.final_coordinates" title="Link to this definition"></a></dt>
+<dd><p>Final cartesian coordinates in Angstroem, <cite>coordinates[atom_idx][axis]</cite></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.final_energy">
+<span class="sig-name descname"><span class="pre">final_energy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.final_energy" title="Link to this definition"></a></dt>
+<dd><p>Final energy in kJ/mol</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.final_single_point">
+<span class="sig-name descname"><span class="pre">final_single_point</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation" title="pyorca.orca_output.single_point.single_point.SinglePointCalculation"><span class="pre">SinglePointCalculation</span></a></em><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.final_single_point" title="Link to this definition"></a></dt>
+<dd><p>Final evaluation at the stationary point</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.find_and_parse">
+<span class="sig-name descname"><span class="pre">find_and_parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.orca_output.orca_property.orca_property.OrcaProperty" title="pyorca.orca_output.orca_property.orca_property.OrcaProperty"><span class="pre">OrcaProperty</span></a></span></span><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.find_and_parse" title="Link to this definition"></a></dt>
+<dd><p>Finds and parses part of the ORCA output text containing information from Orca Property Calculation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.initial_coordinates">
+<span class="sig-name descname"><span class="pre">initial_coordinates</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.initial_coordinates" title="Link to this definition"></a></dt>
+<dd><p>Cartesian coordinates of the initial structure in Angstroem, <cite>coordinates[atom_idx][axis]</cite></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.nmr">
+<span class="sig-name descname"><span class="pre">nmr</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.orca_property.nmr.Nmr" title="pyorca.orca_output.orca_property.nmr.Nmr"><span class="pre">Nmr</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.nmr" title="Link to this definition"></a></dt>
+<dd><p>NMR shifts and coupling constants, if calculated</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.normal_modes">
+<span class="sig-name descname"><span class="pre">normal_modes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.orca_property.normal_modes.NormalModes" title="pyorca.orca_output.orca_property.normal_modes.NormalModes"><span class="pre">NormalModes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.normal_modes" title="Link to this definition"></a></dt>
+<dd><p>Normal modes and IR intensities, if calculated</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization" title="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization"><span class="pre">GeometryOptimization</span></a></span></span><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.parse" title="Link to this definition"></a></dt>
+<dd><p>Parses part of ORCA output text containing information about geometry optimization</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.rotational_constants">
+<span class="sig-name descname"><span class="pre">rotational_constants</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.rotational_constants" title="Link to this definition"></a></dt>
+<dd><p>Rotational constants in cm^-1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.thermochemistry">
+<span class="sig-name descname"><span class="pre">thermochemistry</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry" title="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry"><span class="pre">Thermochemistry</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization.thermochemistry" title="Link to this definition"></a></dt>
+<dd><p>Thermodynamical energies at individiual temperatures</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="nebsettings">
+<h2>NebSettings<a class="headerlink" href="#nebsettings" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.settings.NebSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyorca.orca_output.nudged_elastic_bands.settings.</span></span><span class="sig-name descname"><span class="pre">NebSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_opt_images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimize_endpoints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.settings.NebSettings" title="Link to this definition"></a></dt>
+<dd><p>Contains information about NEB settings</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.settings.NebSettings.n_images">
+<span class="sig-name descname"><span class="pre">n_images</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.settings.NebSettings.n_images" title="Link to this definition"></a></dt>
+<dd><p>Number of images</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.settings.NebSettings.n_opt_images">
+<span class="sig-name descname"><span class="pre">n_opt_images</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.settings.NebSettings.n_opt_images" title="Link to this definition"></a></dt>
+<dd><p>Number of optimized images</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.settings.NebSettings.optimize_endpoints">
+<span class="sig-name descname"><span class="pre">optimize_endpoints</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.settings.NebSettings.optimize_endpoints" title="Link to this definition"></a></dt>
+<dd><p>Optimize end points before NEB calculation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.settings.NebSettings.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.orca_output.nudged_elastic_bands.settings.NebSettings" title="pyorca.orca_output.nudged_elastic_bands.settings.NebSettings"><span class="pre">NebSettings</span></a></span></span><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.settings.NebSettings.parse" title="Link to this definition"></a></dt>
+<dd><p>Finds and parses NEB settings summary</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="nmr">
+<h2>Nmr<a class="headerlink" href="#nmr" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.nmr.Nmr">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyorca.orca_output.orca_property.nmr.</span></span><span class="sig-name descname"><span class="pre">Nmr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shifts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.orca_property.nmr.NmrShift" title="pyorca.orca_output.orca_property.nmr.NmrShift"><span class="pre">NmrShift</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coupling_constants</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyorca.orca_output.orca_property.nmr.Nmr" title="Link to this definition"></a></dt>
+<dd><p>Calculated NMR data, such as shifts and coupling constants.</p>
+<p>Note that shifts must be adjusted as: <cite>s(reported) = s(reference) - s(sample)</cite></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.nmr.Nmr.calibrate_shifts">
+<span class="sig-name descname"><span class="pre">calibrate_shifts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">standards</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyorca.orca_output.orca_property.nmr.Nmr.calibrate_shifts" title="Link to this definition"></a></dt>
+<dd><p>Adjusts the NMR shifts according to <cite>s(reported) = s(standard) - s(calculated)</cite></p>
+<p>The <cite>standards</cite> parameter should map [atom symbol] -&gt; [shift of standard]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.nmr.Nmr.coupling_constants">
+<span class="sig-name descname"><span class="pre">coupling_constants</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.nmr.Nmr.coupling_constants" title="Link to this definition"></a></dt>
+<dd><p>Isotropic coupling constants in Hz, None if wasn’t calculated for given interaction</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.nmr.Nmr.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.orca_output.orca_property.nmr.Nmr" title="pyorca.orca_output.orca_property.nmr.Nmr"><span class="pre">Nmr</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#pyorca.orca_output.orca_property.nmr.Nmr.parse" title="Link to this definition"></a></dt>
+<dd><p>Parses NMR data from <cite>Orca Property Calculation</cite> text. The total number of atoms must be provided</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.nmr.Nmr.shifts">
+<span class="sig-name descname"><span class="pre">shifts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.orca_property.nmr.NmrShift" title="pyorca.orca_output.orca_property.nmr.NmrShift"><span class="pre">NmrShift</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.nmr.Nmr.shifts" title="Link to this definition"></a></dt>
+<dd><p>Individual isotropic shielding constants</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="nmrshift">
+<h2>NmrShift<a class="headerlink" href="#nmrshift" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.nmr.NmrShift">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyorca.orca_output.orca_property.nmr.</span></span><span class="sig-name descname"><span class="pre">NmrShift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyorca.orca_output.orca_property.nmr.NmrShift" title="Link to this definition"></a></dt>
+<dd><p>Isotropic NMR shielding constant of single nucleus</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.nmr.NmrShift.atom">
+<span class="sig-name descname"><span class="pre">atom</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.nmr.NmrShift.atom" title="Link to this definition"></a></dt>
+<dd><p>Atom symbol, such as <cite>H</cite> or <cite>C</cite></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.nmr.NmrShift.atom_idx">
+<span class="sig-name descname"><span class="pre">atom_idx</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.nmr.NmrShift.atom_idx" title="Link to this definition"></a></dt>
+<dd><p>Index of the given nucleus</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.nmr.NmrShift.shift">
+<span class="sig-name descname"><span class="pre">shift</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.nmr.NmrShift.shift" title="Link to this definition"></a></dt>
+<dd><p>Isotropic shielding constant</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="normalmodes">
+<h2>NormalModes<a class="headerlink" href="#normalmodes" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.normal_modes.NormalModes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyorca.orca_output.orca_property.normal_modes.</span></span><span class="sig-name descname"><span class="pre">NormalModes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">normal_modes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ir_frequencies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ir_extinction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imaginary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyorca.orca_output.orca_property.normal_modes.NormalModes" title="Link to this definition"></a></dt>
+<dd><p>Contains data from harmonic vibrational modes</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.normal_modes.NormalModes.imaginary">
+<span class="sig-name descname"><span class="pre">imaginary</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.normal_modes.NormalModes.imaginary" title="Link to this definition"></a></dt>
+<dd><p>Count of imaginary vibrational modes - normal modes with negative energies</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.normal_modes.NormalModes.ir_extinction">
+<span class="sig-name descname"><span class="pre">ir_extinction</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.normal_modes.NormalModes.ir_extinction" title="Link to this definition"></a></dt>
+<dd><p>Extinction coefficients of vibrational modes</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.normal_modes.NormalModes.ir_frequencies">
+<span class="sig-name descname"><span class="pre">ir_frequencies</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.normal_modes.NormalModes.ir_frequencies" title="Link to this definition"></a></dt>
+<dd><p>Frequencies of vibrational modes</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.normal_modes.NormalModes.normal_modes">
+<span class="sig-name descname"><span class="pre">normal_modes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.normal_modes.NormalModes.normal_modes" title="Link to this definition"></a></dt>
+<dd><p>Frequencies of normal modes in cm^-1</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.normal_modes.NormalModes.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.orca_output.orca_property.normal_modes.NormalModes" title="pyorca.orca_output.orca_property.normal_modes.NormalModes"><span class="pre">NormalModes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#pyorca.orca_output.orca_property.normal_modes.NormalModes.parse" title="Link to this definition"></a></dt>
+<dd><p>Finds and parses vibrational data, or None if vibrational data is not present</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="nudgedelasticbands">
+<h2>NudgedElasticBands<a class="headerlink" href="#nudgedelasticbands" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.</span></span><span class="sig-name descname"><span class="pre">NudgedElasticBands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_coordinates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dipole_moment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotational_constants</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normal_modes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.orca_property.normal_modes.NormalModes" title="pyorca.orca_output.orca_property.normal_modes.NormalModes"><span class="pre">NormalModes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thermochemistry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry" title="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry"><span class="pre">Thermochemistry</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.orca_property.nmr.Nmr" title="pyorca.orca_output.orca_property.nmr.Nmr"><span class="pre">Nmr</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">converged</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.nudged_elastic_bands.settings.NebSettings" title="pyorca.orca_output.nudged_elastic_bands.settings.NebSettings"><span class="pre">NebSettings</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">reactant_optimization</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization" title="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization"><span class="pre">GeometryOptimization</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_optimization</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization" title="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization"><span class="pre">GeometryOptimization</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_optimization</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization" title="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization"><span class="pre">GeometryOptimization</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_distances</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_energies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands" title="Link to this definition"></a></dt>
+<dd><p>Results from nudged elastic bands calculation</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.atoms">
+<span class="sig-name descname"><span class="pre">atoms</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.atoms" title="Link to this definition"></a></dt>
+<dd><p>Atom symbols like <cite>H</cite> or <cite>C</cite>, the order is identical for entire calculation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.converged">
+<span class="sig-name descname"><span class="pre">converged</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.converged" title="Link to this definition"></a></dt>
+<dd><p>Whether the NEB calculation converged</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.dipole_moment">
+<span class="sig-name descname"><span class="pre">dipole_moment</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.dipole_moment" title="Link to this definition"></a></dt>
+<dd><p>Dipole moment in Debye</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.find_and_parse">
+<span class="sig-name descname"><span class="pre">find_and_parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.orca_output.orca_property.orca_property.OrcaProperty" title="pyorca.orca_output.orca_property.orca_property.OrcaProperty"><span class="pre">OrcaProperty</span></a></span></span><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.find_and_parse" title="Link to this definition"></a></dt>
+<dd><p>Finds and parses part of the ORCA output text containing information from Orca Property Calculation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.image_distances">
+<span class="sig-name descname"><span class="pre">image_distances</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.image_distances" title="Link to this definition"></a></dt>
+<dd><p>RMSD (root mean squared distance) of images from reactant in Angstroem</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.image_energies">
+<span class="sig-name descname"><span class="pre">image_energies</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.image_energies" title="Link to this definition"></a></dt>
+<dd><p>Energies of the individual images in kJ/mol</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.initial_coordinates">
+<span class="sig-name descname"><span class="pre">initial_coordinates</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.initial_coordinates" title="Link to this definition"></a></dt>
+<dd><p>Cartesian coordinates of the initial structure in Angstroem, <cite>coordinates[atom_idx][axis]</cite></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.nmr">
+<span class="sig-name descname"><span class="pre">nmr</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.orca_property.nmr.Nmr" title="pyorca.orca_output.orca_property.nmr.Nmr"><span class="pre">Nmr</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.nmr" title="Link to this definition"></a></dt>
+<dd><p>NMR shifts and coupling constants, if calculated</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.normal_modes">
+<span class="sig-name descname"><span class="pre">normal_modes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.orca_property.normal_modes.NormalModes" title="pyorca.orca_output.orca_property.normal_modes.NormalModes"><span class="pre">NormalModes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.normal_modes" title="Link to this definition"></a></dt>
+<dd><p>Normal modes and IR intensities, if calculated</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands" title="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands"><span class="pre">NudgedElasticBands</span></a></span></span><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.parse" title="Link to this definition"></a></dt>
+<dd><p>Parses the Nudged Elastic Bands data from ORCA output text</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.product_optimization">
+<span class="sig-name descname"><span class="pre">product_optimization</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization" title="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization"><span class="pre">GeometryOptimization</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.product_optimization" title="Link to this definition"></a></dt>
+<dd><p>Geometry optimization of the product structure, if calculated</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.reactant_optimization">
+<span class="sig-name descname"><span class="pre">reactant_optimization</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization" title="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization"><span class="pre">GeometryOptimization</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.reactant_optimization" title="Link to this definition"></a></dt>
+<dd><p>Geometry optimization of the reactant structure, if calculated</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.rotational_constants">
+<span class="sig-name descname"><span class="pre">rotational_constants</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.rotational_constants" title="Link to this definition"></a></dt>
+<dd><p>Rotational constants in cm^-1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.settings">
+<span class="sig-name descname"><span class="pre">settings</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.nudged_elastic_bands.settings.NebSettings" title="pyorca.orca_output.nudged_elastic_bands.settings.NebSettings"><span class="pre">NebSettings</span></a></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.settings" title="Link to this definition"></a></dt>
+<dd><p>Settings for the NEB calculation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.thermochemistry">
+<span class="sig-name descname"><span class="pre">thermochemistry</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry" title="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry"><span class="pre">Thermochemistry</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.thermochemistry" title="Link to this definition"></a></dt>
+<dd><p>Thermodynamical energies at individiual temperatures</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.ts_optimization">
+<span class="sig-name descname"><span class="pre">ts_optimization</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization" title="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization"><span class="pre">GeometryOptimization</span></a></em><a class="headerlink" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands.ts_optimization" title="Link to this definition"></a></dt>
+<dd><p>Geometry optimization of the transition state structure</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="optimizationcycle">
+<h2>OptimizationCycle<a class="headerlink" href="#optimizationcycle" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyorca.orca_output.geometry_optimization.optimization_cycle.</span></span><span class="sig-name descname"><span class="pre">OptimizationCycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordinates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">population_analysis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.single_point.population_analysis.PopulationAnalysis" title="pyorca.orca_output.single_point.population_analysis.PopulationAnalysis"><span class="pre">PopulationAnalysis</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle" title="Link to this definition"></a></dt>
+<dd><p>Information about individual geometry optimization cycle.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle.coordinates">
+<span class="sig-name descname"><span class="pre">coordinates</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle.coordinates" title="Link to this definition"></a></dt>
+<dd><p>Cartesian coordinates in Angstroem, <cite>coordinates[atom_idx][axis]</cite></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle.energy">
+<span class="sig-name descname"><span class="pre">energy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle.energy" title="Link to this definition"></a></dt>
+<dd><p>Single point electronic energy in this cycle in kJ/mol</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle" title="pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle"><span class="pre">OptimizationCycle</span></a></span></span><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle.parse" title="Link to this definition"></a></dt>
+<dd><p>Parses information from text extracted from output file</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle.population_analysis">
+<span class="sig-name descname"><span class="pre">population_analysis</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.single_point.population_analysis.PopulationAnalysis" title="pyorca.orca_output.single_point.population_analysis.PopulationAnalysis"><span class="pre">PopulationAnalysis</span></a></em><a class="headerlink" href="#pyorca.orca_output.geometry_optimization.optimization_cycle.OptimizationCycle.population_analysis" title="Link to this definition"></a></dt>
+<dd><p>Bond orders and atomic charges</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="orcaoutput">
+<h2>OrcaOutput<a class="headerlink" href="#orcaoutput" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyorca.OrcaOutput">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyorca.</span></span><span class="sig-name descname"><span class="pre">OrcaOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminated_normally</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calculations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation" title="pyorca.orca_output.single_point.single_point.SinglePointCalculation"><span class="pre">SinglePointCalculation</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization" title="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization"><span class="pre">GeometryOptimization</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.relaxed_scan.relaxed_scan.RelaxedScan" title="pyorca.orca_output.relaxed_scan.relaxed_scan.RelaxedScan"><span class="pre">RelaxedScan</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands" title="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands"><span class="pre">NudgedElasticBands</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyorca.OrcaOutput" title="Link to this definition"></a></dt>
+<dd><p>Summary of ORCA output file</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.OrcaOutput.calculations">
+<span class="sig-name descname"><span class="pre">calculations</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation" title="pyorca.orca_output.single_point.single_point.SinglePointCalculation"><span class="pre">SinglePointCalculation</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization" title="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization"><span class="pre">GeometryOptimization</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.relaxed_scan.relaxed_scan.RelaxedScan" title="pyorca.orca_output.relaxed_scan.relaxed_scan.RelaxedScan"><span class="pre">RelaxedScan</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands" title="pyorca.orca_output.nudged_elastic_bands.nudged_elastic_bands.NudgedElasticBands"><span class="pre">NudgedElasticBands</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.OrcaOutput.calculations" title="Link to this definition"></a></dt>
+<dd><p>Summary of all calculations from the output file</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.OrcaOutput.duration">
+<span class="sig-name descname"><span class="pre">duration</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyorca.OrcaOutput.duration" title="Link to this definition"></a></dt>
+<dd><p>The duration of the program execution, may not be available if ORCA terminates with an error</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.OrcaOutput.input_filename">
+<span class="sig-name descname"><span class="pre">input_filename</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pyorca.OrcaOutput.input_filename" title="Link to this definition"></a></dt>
+<dd><p>File name of the input file</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.OrcaOutput.input_text">
+<span class="sig-name descname"><span class="pre">input_text</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pyorca.OrcaOutput.input_text" title="Link to this definition"></a></dt>
+<dd><p>The input text</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.OrcaOutput.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.OrcaOutput" title="pyorca.orca_output.orca_output.OrcaOutput"><span class="pre">OrcaOutput</span></a></span></span><a class="headerlink" href="#pyorca.OrcaOutput.parse" title="Link to this definition"></a></dt>
+<dd><p>Parses text from ORCA output file</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.OrcaOutput.parse_file">
+<span class="sig-name descname"><span class="pre">parse_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.OrcaOutput" title="pyorca.orca_output.orca_output.OrcaOutput"><span class="pre">OrcaOutput</span></a></span></span><a class="headerlink" href="#pyorca.OrcaOutput.parse_file" title="Link to this definition"></a></dt>
+<dd><p>Parses ORCA output file</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.OrcaOutput.terminated_normally">
+<span class="sig-name descname"><span class="pre">terminated_normally</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pyorca.OrcaOutput.terminated_normally" title="Link to this definition"></a></dt>
+<dd><p>Whether the program terminated normally</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="orcaproperty">
+<h2>OrcaProperty<a class="headerlink" href="#orcaproperty" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.orca_property.OrcaProperty">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyorca.orca_output.orca_property.orca_property.</span></span><span class="sig-name descname"><span class="pre">OrcaProperty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_coordinates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dipole_moment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotational_constants</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normal_modes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.orca_property.normal_modes.NormalModes" title="pyorca.orca_output.orca_property.normal_modes.NormalModes"><span class="pre">NormalModes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thermochemistry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry" title="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry"><span class="pre">Thermochemistry</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.orca_property.nmr.Nmr" title="pyorca.orca_output.orca_property.nmr.Nmr"><span class="pre">Nmr</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyorca.orca_output.orca_property.orca_property.OrcaProperty" title="Link to this definition"></a></dt>
+<dd><p>Results of <cite>Orca Property Calculation</cite></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.orca_property.OrcaProperty.atoms">
+<span class="sig-name descname"><span class="pre">atoms</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.orca_property.OrcaProperty.atoms" title="Link to this definition"></a></dt>
+<dd><p>Atom symbols like <cite>H</cite> or <cite>C</cite>, the order is identical for entire calculation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.orca_property.OrcaProperty.dipole_moment">
+<span class="sig-name descname"><span class="pre">dipole_moment</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.orca_property.OrcaProperty.dipole_moment" title="Link to this definition"></a></dt>
+<dd><p>Dipole moment in Debye</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.orca_property.OrcaProperty.find_and_parse">
+<span class="sig-name descname"><span class="pre">find_and_parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.orca_output.orca_property.orca_property.OrcaProperty" title="pyorca.orca_output.orca_property.orca_property.OrcaProperty"><span class="pre">OrcaProperty</span></a></span></span><a class="headerlink" href="#pyorca.orca_output.orca_property.orca_property.OrcaProperty.find_and_parse" title="Link to this definition"></a></dt>
+<dd><p>Finds and parses part of the ORCA output text containing information from Orca Property Calculation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.orca_property.OrcaProperty.initial_coordinates">
+<span class="sig-name descname"><span class="pre">initial_coordinates</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.orca_property.OrcaProperty.initial_coordinates" title="Link to this definition"></a></dt>
+<dd><p>Cartesian coordinates of the initial structure in Angstroem, <cite>coordinates[atom_idx][axis]</cite></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.orca_property.OrcaProperty.nmr">
+<span class="sig-name descname"><span class="pre">nmr</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.orca_property.nmr.Nmr" title="pyorca.orca_output.orca_property.nmr.Nmr"><span class="pre">Nmr</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.orca_property.OrcaProperty.nmr" title="Link to this definition"></a></dt>
+<dd><p>NMR shifts and coupling constants, if calculated</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.orca_property.OrcaProperty.normal_modes">
+<span class="sig-name descname"><span class="pre">normal_modes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.orca_property.normal_modes.NormalModes" title="pyorca.orca_output.orca_property.normal_modes.NormalModes"><span class="pre">NormalModes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.orca_property.OrcaProperty.normal_modes" title="Link to this definition"></a></dt>
+<dd><p>Normal modes and IR intensities, if calculated</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.orca_property.OrcaProperty.rotational_constants">
+<span class="sig-name descname"><span class="pre">rotational_constants</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.orca_property.OrcaProperty.rotational_constants" title="Link to this definition"></a></dt>
+<dd><p>Rotational constants in cm^-1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.orca_property.OrcaProperty.thermochemistry">
+<span class="sig-name descname"><span class="pre">thermochemistry</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry" title="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry"><span class="pre">Thermochemistry</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.orca_property.OrcaProperty.thermochemistry" title="Link to this definition"></a></dt>
+<dd><p>Thermodynamical energies at individiual temperatures</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="populationanalysis">
+<h2>PopulationAnalysis<a class="headerlink" href="#populationanalysis" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.population_analysis.PopulationAnalysis">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyorca.orca_output.single_point.population_analysis.</span></span><span class="sig-name descname"><span class="pre">PopulationAnalysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">charges_mulliken</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">charges_loewdin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_orders</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">BondOrder</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyorca.orca_output.single_point.population_analysis.PopulationAnalysis" title="Link to this definition"></a></dt>
+<dd><p>Electronic population analysis information</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.population_analysis.PopulationAnalysis.bond_orders">
+<span class="sig-name descname"><span class="pre">bond_orders</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">BondOrder</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.single_point.population_analysis.PopulationAnalysis.bond_orders" title="Link to this definition"></a></dt>
+<dd><p>Reported Mayer bond orders</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.population_analysis.PopulationAnalysis.charges_loewdin">
+<span class="sig-name descname"><span class="pre">charges_loewdin</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.single_point.population_analysis.PopulationAnalysis.charges_loewdin" title="Link to this definition"></a></dt>
+<dd><p>Loewdin atomic charges</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.population_analysis.PopulationAnalysis.charges_mulliken">
+<span class="sig-name descname"><span class="pre">charges_mulliken</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.single_point.population_analysis.PopulationAnalysis.charges_mulliken" title="Link to this definition"></a></dt>
+<dd><p>Mulliken atomic charges</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.population_analysis.PopulationAnalysis.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.orca_output.single_point.population_analysis.PopulationAnalysis" title="pyorca.orca_output.single_point.population_analysis.PopulationAnalysis"><span class="pre">PopulationAnalysis</span></a></span></span><a class="headerlink" href="#pyorca.orca_output.single_point.population_analysis.PopulationAnalysis.parse" title="Link to this definition"></a></dt>
+<dd><p>Finds and parses population analysis data</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="relaxedscan">
+<h2>RelaxedScan<a class="headerlink" href="#relaxedscan" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyorca.orca_output.relaxed_scan.relaxed_scan.RelaxedScan">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyorca.orca_output.relaxed_scan.relaxed_scan.</span></span><span class="sig-name descname"><span class="pre">RelaxedScan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization" title="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization"><span class="pre">GeometryOptimization</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyorca.orca_output.relaxed_scan.relaxed_scan.RelaxedScan" title="Link to this definition"></a></dt>
+<dd><p>Results from relaxed surface scan calculation</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.relaxed_scan.relaxed_scan.RelaxedScan.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.orca_output.relaxed_scan.relaxed_scan.RelaxedScan" title="pyorca.orca_output.relaxed_scan.relaxed_scan.RelaxedScan"><span class="pre">RelaxedScan</span></a></span></span><a class="headerlink" href="#pyorca.orca_output.relaxed_scan.relaxed_scan.RelaxedScan.parse" title="Link to this definition"></a></dt>
+<dd><p>Parses the relaxed surface scan data from the text from ORCA output file</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.relaxed_scan.relaxed_scan.RelaxedScan.steps">
+<span class="sig-name descname"><span class="pre">steps</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization" title="pyorca.orca_output.geometry_optimization.geometry_optimization.GeometryOptimization"><span class="pre">GeometryOptimization</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.relaxed_scan.relaxed_scan.RelaxedScan.steps" title="Link to this definition"></a></dt>
+<dd><p>Results from individual constrained optimizations</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="singlepointcalculation">
+<h2>SinglePointCalculation<a class="headerlink" href="#singlepointcalculation" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.single_point.SinglePointCalculation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyorca.orca_output.single_point.single_point.</span></span><span class="sig-name descname"><span class="pre">SinglePointCalculation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_coordinates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dipole_moment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotational_constants</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normal_modes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.orca_property.normal_modes.NormalModes" title="pyorca.orca_output.orca_property.normal_modes.NormalModes"><span class="pre">NormalModes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thermochemistry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry" title="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry"><span class="pre">Thermochemistry</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.orca_property.nmr.Nmr" title="pyorca.orca_output.orca_property.nmr.Nmr"><span class="pre">Nmr</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">population_analysis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.single_point.population_analysis.PopulationAnalysis" title="pyorca.orca_output.single_point.population_analysis.PopulationAnalysis"><span class="pre">PopulationAnalysis</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">electronic_spectrum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum" title="pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum"><span class="pre">ElectronicSpectrum</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation" title="Link to this definition"></a></dt>
+<dd><p>Results of single point calculation</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.single_point.SinglePointCalculation.atoms">
+<span class="sig-name descname"><span class="pre">atoms</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation.atoms" title="Link to this definition"></a></dt>
+<dd><p>Atom symbols like <cite>H</cite> or <cite>C</cite>, the order is identical for entire calculation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.single_point.SinglePointCalculation.dipole_moment">
+<span class="sig-name descname"><span class="pre">dipole_moment</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation.dipole_moment" title="Link to this definition"></a></dt>
+<dd><p>Dipole moment in Debye</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.single_point.SinglePointCalculation.electronic_spectrum">
+<span class="sig-name descname"><span class="pre">electronic_spectrum</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum" title="pyorca.orca_output.single_point.electronic_spectrum.ElectronicSpectrum"><span class="pre">ElectronicSpectrum</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation.electronic_spectrum" title="Link to this definition"></a></dt>
+<dd><p>UV-VIS transition energies and intensities, if calculated</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.single_point.SinglePointCalculation.energy">
+<span class="sig-name descname"><span class="pre">energy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation.energy" title="Link to this definition"></a></dt>
+<dd><p>Final single point energy</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.single_point.SinglePointCalculation.find_and_parse">
+<span class="sig-name descname"><span class="pre">find_and_parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.orca_output.orca_property.orca_property.OrcaProperty" title="pyorca.orca_output.orca_property.orca_property.OrcaProperty"><span class="pre">OrcaProperty</span></a></span></span><a class="headerlink" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation.find_and_parse" title="Link to this definition"></a></dt>
+<dd><p>Finds and parses part of the ORCA output text containing information from Orca Property Calculation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.single_point.SinglePointCalculation.initial_coordinates">
+<span class="sig-name descname"><span class="pre">initial_coordinates</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation.initial_coordinates" title="Link to this definition"></a></dt>
+<dd><p>Cartesian coordinates of the initial structure in Angstroem, <cite>coordinates[atom_idx][axis]</cite></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.single_point.SinglePointCalculation.nmr">
+<span class="sig-name descname"><span class="pre">nmr</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.orca_property.nmr.Nmr" title="pyorca.orca_output.orca_property.nmr.Nmr"><span class="pre">Nmr</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation.nmr" title="Link to this definition"></a></dt>
+<dd><p>NMR shifts and coupling constants, if calculated</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.single_point.SinglePointCalculation.normal_modes">
+<span class="sig-name descname"><span class="pre">normal_modes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.orca_property.normal_modes.NormalModes" title="pyorca.orca_output.orca_property.normal_modes.NormalModes"><span class="pre">NormalModes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation.normal_modes" title="Link to this definition"></a></dt>
+<dd><p>Normal modes and IR intensities, if calculated</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.single_point.SinglePointCalculation.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation" title="pyorca.orca_output.single_point.single_point.SinglePointCalculation"><span class="pre">SinglePointCalculation</span></a></span></span><a class="headerlink" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation.parse" title="Link to this definition"></a></dt>
+<dd><p>Parses part of ORCA output text containing information about geometry optimization</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.single_point.SinglePointCalculation.population_analysis">
+<span class="sig-name descname"><span class="pre">population_analysis</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pyorca.orca_output.single_point.population_analysis.PopulationAnalysis" title="pyorca.orca_output.single_point.population_analysis.PopulationAnalysis"><span class="pre">PopulationAnalysis</span></a></em><a class="headerlink" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation.population_analysis" title="Link to this definition"></a></dt>
+<dd><p>Atomic charges and bond orders</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.single_point.SinglePointCalculation.rotational_constants">
+<span class="sig-name descname"><span class="pre">rotational_constants</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation.rotational_constants" title="Link to this definition"></a></dt>
+<dd><p>Rotational constants in cm^-1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.single_point.single_point.SinglePointCalculation.thermochemistry">
+<span class="sig-name descname"><span class="pre">thermochemistry</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry" title="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry"><span class="pre">Thermochemistry</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyorca.orca_output.single_point.single_point.SinglePointCalculation.thermochemistry" title="Link to this definition"></a></dt>
+<dd><p>Thermodynamical energies at individiual temperatures</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="thermochemistry">
+<h2>Thermochemistry<a class="headerlink" href="#thermochemistry" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyorca.orca_output.orca_property.thermochemistry.</span></span><span class="sig-name descname"><span class="pre">Thermochemistry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">single_point_energy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zpe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inner_energy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enthalpy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entropy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gibbs_energy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry" title="Link to this definition"></a></dt>
+<dd><p>Results of thermochemistry calculations at single temperature.</p>
+<p>All energies are in kJ/mol, entropy is in J/mol/K.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.enthalpy">
+<span class="sig-name descname"><span class="pre">enthalpy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.enthalpy" title="Link to this definition"></a></dt>
+<dd><p>Enthalpy <cite>H</cite></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.entropy">
+<span class="sig-name descname"><span class="pre">entropy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.entropy" title="Link to this definition"></a></dt>
+<dd><p>Entropy <cite>S</cite></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.gibbs_energy">
+<span class="sig-name descname"><span class="pre">gibbs_energy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.gibbs_energy" title="Link to this definition"></a></dt>
+<dd><p>Gibb’s energy <cite>G</cite></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.inner_energy">
+<span class="sig-name descname"><span class="pre">inner_energy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.inner_energy" title="Link to this definition"></a></dt>
+<dd><p>Inner energy <cite>U</cite></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry" title="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry"><span class="pre">Thermochemistry</span></a></span></span><a class="headerlink" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.parse" title="Link to this definition"></a></dt>
+<dd><p>“Takes in text with single segment of thermodynamic data and parses it</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.single_point_energy">
+<span class="sig-name descname"><span class="pre">single_point_energy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.single_point_energy" title="Link to this definition"></a></dt>
+<dd><p>Electronic single point energy</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.temperature">
+<span class="sig-name descname"><span class="pre">temperature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.temperature" title="Link to this definition"></a></dt>
+<dd><p>Temperature in Kelvin</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.zpe">
+<span class="sig-name descname"><span class="pre">zpe</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pyorca.orca_output.orca_property.thermochemistry.Thermochemistry.zpe" title="Link to this definition"></a></dt>
+<dd><p>Zero point energy - vibrational correction to electronic energy</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="parsing_output.opt.html" class="btn btn-neutral float-left" title="Geometry Optimization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="geometry.example.html" class="btn btn-neutral float-right" title="Comparing Geometry Accuracy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jan Oboril.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

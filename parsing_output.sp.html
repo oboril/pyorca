@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Single Point Calculation &mdash; PyOrca 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Geometry Optimization" href="parsing_output.opt.html" />
+    <link rel="prev" title="Parsing ORCA output files" href="parsing_output.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PyOrca
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to PyORCA!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parsing Output</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.html">Parsing ORCA output files</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Single Point Calculation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.opt.html">Geometry Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.ref.html">PyORCA.orca_output reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">3D structures</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="geometry.example.html">Comparing Geometry Accuracy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.ref.html">PyORCA.geometry reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conformers.ref.html">PyORCA.conformers reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Automated Workflows</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="automatic_nmr.html">NMR shifts of solvents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orca_interface.ref.html">PyORCA.orca_interface reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyOrca</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Single Point Calculation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="single-point-calculation">
+<h1>Single Point Calculation<a class="headerlink" href="#single-point-calculation" title="Link to this heading"></a></h1>
+<p>The results of single point calculations are in <code class="docutils literal notranslate"><span class="pre">SinglePointCalculation</span></code> class.</p>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<p>The optimizied geometry of ethylene was used to calculate the electronic transitions, these can be useful for predicting UV-VIS spectrum.</p>
+<p>The ORCA output is in the <a class="reference download internal" download="" href="_downloads/e10dd65392f3e810b23f97cc62ed76ff/ethylene_uvvis.out"><code class="xref download docutils literal notranslate"><span class="pre">ethylene_uvvis.out</span></code></a> file, let’s see how we can parse it!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import PyORCA</span>
+<span class="kn">import</span> <span class="nn">pyorca</span> <span class="k">as</span> <span class="nn">po</span>
+
+<span class="c1"># parse the ORCA output file</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">po</span><span class="o">.</span><span class="n">OrcaOutput</span><span class="o">.</span><span class="n">parse_file</span><span class="p">(</span><span class="s1">&#39;ethylene_uvvis.out&#39;</span><span class="p">)</span>
+
+<span class="c1"># check that the calculation terminated normally</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">terminated_normally</span><span class="p">)</span>
+
+<span class="c1"># this output file contains only single calculations, the TD-DFT calculation</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of calculations:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">calculations</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># get the information about electronic spectrum</span>
+<span class="n">electronic_spectrum</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">calculations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">electronic_spectrum</span>
+
+<span class="c1"># print the wavelengths and intensities of electronic transitions</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Electronic transitions:&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">wavelength</span><span class="p">,</span> <span class="n">intensity</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">electronic_spectrum</span><span class="o">.</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">electronic_spectrum</span><span class="o">.</span><span class="n">intensities</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wavelength</span><span class="si">:</span><span class="s1">0.1f</span><span class="si">}</span><span class="s1"> nm (relative intensity </span><span class="si">{</span><span class="n">intensity</span><span class="si">:</span><span class="s1">0.4f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Number of calculations: 1
+
+Electronic transitions:
+153.3 nm (relative intensity 0.0000)
+152.2 nm (relative intensity 0.0141)
+148.3 nm (relative intensity 0.5309)
+142.6 nm (relative intensity 0.0000)
+138.5 nm (relative intensity 0.0000)
+127.9 nm (relative intensity 0.0000)
+119.5 nm (relative intensity 0.0000)
+117.8 nm (relative intensity 0.0000)
+111.6 nm (relative intensity 0.0000)
+110.7 nm (relative intensity 0.2355)
+</pre></div>
+</div>
+<p>The experimental UV-VIS spectrum of ethylene has absorption maximum around 261 nm,
+so it seems that simple B3LYP/def2-TZVP doesn’t give us very good estimate.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="parsing_output.html" class="btn btn-neutral float-left" title="Parsing ORCA output files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="parsing_output.opt.html" class="btn btn-neutral float-right" title="Geometry Optimization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jan Oboril.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

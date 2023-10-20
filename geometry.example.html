@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comparing Geometry Accuracy &mdash; PyOrca 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="PyORCA.geometry reference" href="geometry.ref.html" />
+    <link rel="prev" title="PyORCA.orca_output reference" href="parsing_output.ref.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PyOrca
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to PyORCA!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parsing Output</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.html">Parsing ORCA output files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.sp.html">Single Point Calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.opt.html">Geometry Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parsing_output.ref.html">PyORCA.orca_output reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">3D structures</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Comparing Geometry Accuracy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.ref.html">PyORCA.geometry reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conformers.ref.html">PyORCA.conformers reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Automated Workflows</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="automatic_nmr.html">NMR shifts of solvents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orca_interface.ref.html">PyORCA.orca_interface reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyOrca</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Comparing Geometry Accuracy</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="comparing-geometry-accuracy">
+<h1>Comparing Geometry Accuracy<a class="headerlink" href="#comparing-geometry-accuracy" title="Link to this heading"></a></h1>
+<p>This simple example will demonstrate basic usecases of the <a class="reference internal" href="geometry.ref.html"><span class="doc">pyorca.geometry</span></a> module.</p>
+<p>The geometry of fluoromethane was optimized at different levels of theory,
+such as from semi-empirical PM3, local BLYP, hybrid B3LYP and double-hybrid B2PLYP.
+We want to see how accurate and fast are these methods - let’s use PyORCA to analyse that!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyorca</span> <span class="k">as</span> <span class="nn">po</span>
+
+<span class="c1"># load the experimentally determined geometry as a reference</span>
+<span class="c1"># the order of atoms if [C, F, H, H, H]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;fluoromethane.xyz&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">atoms</span><span class="p">,</span> <span class="n">exp_geometry</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">po</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">read_xyz</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="c1"># this is the list of different levels of theory and the respective output files</span>
+<span class="n">calculated</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;PM3&quot;</span><span class="p">,</span> <span class="s2">&quot;fluoromethane_PM3.out&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;BLYP/def2-SVP&quot;</span><span class="p">,</span> <span class="s2">&quot;fluoromethane_BLYP_SVP.out&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;B3LYP/def2-SVP&quot;</span><span class="p">,</span> <span class="s2">&quot;fluoromethane_B3LYP_SVP.out&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;B3LYP/def2-TZVP&quot;</span><span class="p">,</span> <span class="s2">&quot;fluoromethane_B3LYP_TZVP.out&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;B3LYP/def2-TZVP/D4&quot;</span><span class="p">,</span> <span class="s2">&quot;fluoromethane_B3LYP_TZVP_D4.out&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;B2PLYP/def2-TZVP&quot;</span><span class="p">,</span> <span class="s2">&quot;fluoromethane_B2PLYP_TZVP.out&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;B2PLYP/def2-QZVPP&quot;</span><span class="p">,</span> <span class="s2">&quot;fluoromethane_B2PLYP_QZVPP.out&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="c1"># this function extracts information about the geometry</span>
+<span class="c1"># and also calculates RMSD (root mean squared distance) from the experimental structure</span>
+<span class="k">def</span> <span class="nf">calc_descriptors</span><span class="p">(</span><span class="n">exp_geometry</span><span class="p">,</span> <span class="n">other_geometry</span><span class="p">):</span>
+    <span class="c1"># align the structures and calculate RMSD</span>
+    <span class="n">rmds</span> <span class="o">=</span> <span class="n">po</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">aligned_rmsd</span><span class="p">(</span><span class="n">exp_geometry</span><span class="p">,</span> <span class="n">other_geometry</span><span class="p">)</span>
+
+    <span class="c1"># calculate bond distances and angles</span>
+    <span class="n">CF_dist</span> <span class="o">=</span> <span class="n">po</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">other_geometry</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">other_geometry</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">CH_dist</span> <span class="o">=</span> <span class="n">po</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">other_geometry</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">other_geometry</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">HCH_angl</span> <span class="o">=</span> <span class="n">po</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">angle_degree</span><span class="p">(</span><span class="n">other_geometry</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">other_geometry</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">other_geometry</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+    <span class="c1"># return all values for printing</span>
+    <span class="k">return</span> <span class="n">rmds</span><span class="p">,</span> <span class="n">CF_dist</span><span class="p">,</span> <span class="n">CH_dist</span><span class="p">,</span> <span class="n">HCH_angl</span>
+
+<span class="c1"># Define template for printing nice table</span>
+<span class="n">template</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{: &lt;18}</span><span class="s1"> </span><span class="si">{: &lt;10.3f}</span><span class="s1"> </span><span class="si">{: &lt;10.3f}</span><span class="s1"> </span><span class="si">{: &lt;10.3f}</span><span class="s1"> </span><span class="si">{: &lt;10.3f}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span>
+
+<span class="c1"># print table header</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.3f&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Method&#39;</span><span class="p">,</span> <span class="s1">&#39;RMSD&#39;</span><span class="p">,</span> <span class="s1">&#39;C-F dist.&#39;</span><span class="p">,</span> <span class="s1">&#39;C-H dist.&#39;</span><span class="p">,</span> <span class="s1">&#39;H-C-H angl.&#39;</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># print the experimental geometry for reference</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Experimental&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">calc_descriptors</span><span class="p">(</span><span class="n">exp_geometry</span><span class="p">,</span> <span class="n">exp_geometry</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">))</span>
+
+<span class="c1"># process all ORCA output files</span>
+<span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">calculated</span><span class="p">:</span>
+    <span class="c1"># parse the file</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">po</span><span class="o">.</span><span class="n">OrcaOutput</span><span class="o">.</span><span class="n">parse_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="c1"># load final geometry and calculation duration</span>
+    <span class="n">final_geometry</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">calculations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">final_coordinates</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">duration</span>
+
+    <span class="c1"># print the data</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">calc_descriptors</span><span class="p">(</span><span class="n">exp_geometry</span><span class="p">,</span> <span class="n">final_geometry</span><span class="p">),</span> <span class="n">duration</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Method             RMSD       C-F dist.  C-H dist.  H-C-H angl. duration
+Experimental       0.000      1.365      1.082      110.202    -
+PM3                0.010      1.351      1.092      110.362    0:00:03.159000
+BLYP/def2-SVP      0.028      1.387      1.112      108.819    0:00:11.827000
+B3LYP/def2-SVP     0.020      1.373      1.104      108.958    0:00:24.174000
+B3LYP/def2-TZVP    0.013      1.390      1.091      110.109    0:00:43.175000
+B3LYP/def2-TZVP/D4 0.013      1.390      1.091      110.104    0:00:55.844000
+B2PLYP/def2-TZVP   0.011      1.388      1.089      110.137    0:01:13.593000
+B2PLYP/def2-QZVPP  0.010      1.388      1.087      110.193    0:35:23.387000
+</pre></div>
+</div>
+<p>As we can see, the geometry accuracy gets better with more complex functionals and larger basis sets,
+but the calculations also take a lot longer.</p>
+<p>Semi-empirical methods, such as PM3, can often provide high-quality geometries much faster than DFT,
+but the results become much less reliable for not-so-common molecules and structural motives.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="parsing_output.ref.html" class="btn btn-neutral float-left" title="PyORCA.orca_output reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="geometry.ref.html" class="btn btn-neutral float-right" title="PyORCA.geometry reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jan Oboril.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
