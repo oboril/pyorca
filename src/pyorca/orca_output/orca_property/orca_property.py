@@ -2,7 +2,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Optional
 
-from pyorca.constants import hartree
 from pyorca.orca_output.orca_property.normal_modes import NormalModes
 from pyorca.orca_output.orca_property.thermochemistry import Thermochemistry
 from pyorca.orca_output.orca_property.nmr import Nmr
@@ -32,9 +31,6 @@ class OrcaProperty:
     nmr : Nmr | None
     """NMR shifts and coupling constants, if calculated"""
 
-    energy : float
-    """Final single point energy"""
-
     def find_and_parse(text: str) -> OrcaProperty:
         """Finds and parses part of the ORCA output text containing information from Orca Property Calculation"""
 
@@ -54,8 +50,6 @@ class OrcaProperty:
 
         nmr = Nmr.parse(text)
 
-        energy = _parse_energy(text)
-
         data = OrcaProperty(
             atoms=atoms,
             initial_coordinates=initial_coordinates,
@@ -63,8 +57,7 @@ class OrcaProperty:
             rotational_constants=rotational_constants,
             normal_modes=normal_modes,
             thermochemistry=thermochemistry,
-            nmr=nmr,
-            energy=energy
+            nmr=nmr
         )
 
         return data
@@ -138,16 +131,3 @@ def _parse_all_thermochemistry(text: str) -> List[Thermochemistry]:
     result = [Thermochemistry.parse(ext) for ext in extracted]
 
     return result
-
-def _parse_energy(text: str) -> float:
-    """Finds and parses all thermochemical data in `Orca Property Calculation` section"""
-
-    energy = re.search(
-        r"FINAL SINGLE POINT ENERGY\s+(\-?\d+\.\d+)",
-        text
-    )
-
-    if energy is None:
-        return None
-    
-    return float(energy.group(1)) * hartree
